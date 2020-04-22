@@ -19,12 +19,11 @@ def main():
     level.display_maze(window)
     level.perso_start_position(window)
     # Player movements
-    player = Player(level)   
-
+    player = Player(level)
 
 
 ################################## GAME LOOP ################################
-    pygame.key.set_repeat(key_set_repeat_delay,key_set_repeat_interval)
+    pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
     pygame.time.Clock().tick(time_clock_tick)
     loop = 1
     sprite = sprites_size
@@ -34,21 +33,19 @@ def main():
             # Close window
             if event.type == QUIT:
                 loop = 0
-            # Keyboard reactions    
-            if event.type == KEYDOWN:
-                # print(position_perso) # To Clean
+            # Keyboard reactions
+            if event.type == KEYDOWN:                
                 if event.key == K_UP:
-                    # position_perso = (position_perso[0], position_perso[1]-1)                    
                     position_perso = player.movement('up')
                 if event.key == K_DOWN:
-                    # position_perso = (position_perso[0], position_perso[1]+1)
                     position_perso = player.movement('down')
                 if event.key == K_LEFT:
-                    # position_perso = (position_perso[0]-1, position_perso[1])
                     position_perso = player.movement('left')
                 if event.key == K_RIGHT:
-                    # position_perso = (position_perso[0]+1, position_perso[1])
-                    position_perso = player.movement('right')
+                    position_perso = player.movement('right')                    
+        if (player.x, player.y) == level.position_outdoor:
+            print('YOU WIN!')
+            loop = 0          
         # Re-paste images
         background = pygame.image.load(background_file).convert()
         perso = pygame.image.load(perso_file).convert_alpha()
@@ -57,20 +54,24 @@ def main():
         window.blit(perso, (player.x*sprite, player.y*sprite))
         # Refresh
         pygame.display.flip()
+        
 ################################# END GAME LOOP ##############################
+
 
 main()
 
 
 ############################### TO DO ######################
-#  Inventory:
-#     """Return True when all items are looted"""
-#     #list of objects on MacGyver
-
 #  Loots:
 #     """Rules when MacGyver come on Loots cell"""
 #     # Erase the loot on the graph and make a empty cell
 #     # Add the loot in the Inventory list
+
+
+# #  Inventory:
+#     """Return True when all items are looted"""
+#     #list of objects on MacGyver
+
 
 #  Badguy:
 #     """Rules when MacGyver come on BadGuy cell"""
@@ -79,9 +80,4 @@ main()
 #     # Kill MacGyver
 #     # Is killed by MacGyver
 
-#  Outdoor:
-#     """Rules when MacGyver come on Outdoor cell"""
-
-#     # Win condition when MacGyver is on the cell
-#     # STOP PROGRAM
 ############################ END TO DO ######################
