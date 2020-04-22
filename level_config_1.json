@@ -1,4 +1,4 @@
-"""To create the labyrinth. Indicate for each zone if it's filled by walls, objects, persons or if it's empty."""
+"""To create the maze. Indicate for each zone if it's filled by walls, objects, persons or if it's empty."""
 
 #### LEGEND ####
 # W : is a Wall
@@ -11,9 +11,9 @@
 # O : is the Outdoor
 
 
-#### Labyrinth 15*15 ####
+#### maze 15*15 ####
 
-# Write the labyrinth from ligne 17 to 31 :
+# Write the maze from ligne 17 to 31 :
 WWWWWWWWWWWWWWW
 WWEEWEEEEEEEEWW
 WEEWEEWWWWWWEEW
