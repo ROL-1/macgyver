@@ -1,35 +1,35 @@
-"""Classes file for MacGiver Labyrinth game."""
+"""Classes file for MacGiver Maze game."""
 import numpy as np
 import pygame
 from pygame.locals import *
 
 
-class Create_labyrinth:
-    """Load, generate and display the labyrinth."""
+class Create_maze:
+    """Load, generate and display the maze."""
 
     def __init__(self):
-        """Load labyrinth file."""
-        self.LABY_FILE = "labyrinth.py"
+        """Load maze file."""
+        self.LABY_FILE = "level_config_1.json"
 
-    def load_labyrinth(self):
-        """Read labyrinth file and return a ndarray."""
-        with open(self.LABY_FILE, 'r') as labyrinth_file:
+    def load_maze(self):
+        """Read maze file and return a ndarray."""
+        with open(self.LABY_FILE, 'r') as maze_file:
             # Read 17 to 32 lines only
-            labyrinth_file_line = labyrinth_file.readlines()[16:31]
+            maze_file_line = maze_file.readlines()[16:31]
             laby = []
-            for line in labyrinth_file_line:
+            for line in maze_file_line:
                 laby_line = []
                 for caracter in line:
                     if caracter != '\n':
                         laby_line.append(caracter)
                 laby.append(laby_line)
-                labyrinth = np.array(laby)
-            self.labyrinth = labyrinth
-            print(labyrinth)  # To Clean
-            print(type(labyrinth))  # To Clean
+                maze = np.array(laby)
+            self.maze = maze
+            print(maze)  # To Clean
+            print(type(maze))  # To Clean
 
-    def display_labyrinth(self, window):
-        """Display labyrinth using load_labyrinth."""
+    def display_maze(self, window):
+        """Display maze using load_maze."""
         background = pygame.image.load("images/background.jpg").convert()
         outdoor = pygame.image.load("images/outdoor.png").convert_alpha()
         wall = pygame.image.load("images/wall.png").convert_alpha()
@@ -37,9 +37,9 @@ class Create_labyrinth:
         sprite = 30  # px
         for x in range(15):
             for y in range(15):
-                if self.labyrinth[y][x] == 'W':
+                if self.maze[y][x] == 'W':
                     window.blit(wall, (sprite*x, sprite*y))
-                if self.labyrinth[y][x] == 'O':
+                if self.maze[y][x] == 'O':
                     window.blit(outdoor, (sprite*x, sprite*y))
 
 

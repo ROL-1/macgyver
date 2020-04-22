@@ -1,5 +1,5 @@
-"""Main file for MacGiver Labyrinth game."""
-from classes import *
+"""Main file for MacGiver maze game."""
+from maze import *
 import pygame
 from pygame.locals import *
 
@@ -9,11 +9,11 @@ def main():
     pygame.init()
     # Load window
     window = pygame.display.set_mode((450, 450))
-    # Load & generate the labyrinth from the file
-    level = Create_labyrinth()
-    level.load_labyrinth()
-    # Display the labyrinth
-    level.display_labyrinth(window)
+    # Load & generate the maze from the file
+    level = Create_maze()
+    level.load_maze()
+    # Display the maze
+    level.display_maze(window)
     # Generate player's perso
     player = Perso(window)
 
@@ -38,7 +38,7 @@ def main():
         background = pygame.image.load("images/background.jpg").convert()
         perso = pygame.image.load("images/perso.png").convert_alpha()
         window.blit(background, (0, 0))
-        level.display_labyrinth(window)
+        level.display_maze(window)
         window.blit(perso, (player.position_perso))
         # Refresh
         pygame.display.flip()
