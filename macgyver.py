@@ -1,14 +1,16 @@
 """Main file for MacGiver maze game."""
 from maze import *
+from player import *
 import pygame
 from pygame.locals import *
+from config import *
 
 
 def main():
     """Launch functions."""
     pygame.init()
     # Load window
-    window = pygame.display.set_mode((450, 450))
+    window = pygame.display.set_mode(windows_size)
     # Load & generate the maze from the file
     level = Create_maze()
     level.load_maze()
@@ -18,25 +20,27 @@ def main():
     player = Perso(window)
 
 ################################## GAME LOOP ################################
-    pygame.key.set_repeat(400, 30)
-    pygame.time.Clock().tick(30)
+    pygame.key.set_repeat(key_set_repeat_delay,key_set_repeat_interval)
+    pygame.time.Clock().tick(time_clock_tick)
     loop = 1
     while loop:
         for event in pygame.event.get():
+            # Close window
             if event.type == QUIT:
                 loop = 0
+            # Keyboard reactions    
             if event.type == KEYDOWN:
                 if event.key == K_UP:
-                    player.position_perso = player.position_perso.move(0, -30)
+                    player.position_perso = player.position_perso.move(0, -sprites_size)
                 if event.key == K_DOWN:
-                    player.position_perso = player.position_perso.move(0, 30)
+                    player.position_perso = player.position_perso.move(0, sprites_size)
                 if event.key == K_LEFT:
-                    player.position_perso = player.position_perso.move(-30, 0)
+                    player.position_perso = player.position_perso.move(-sprites_size, 0)
                 if event.key == K_RIGHT:
-                    player.position_perso = player.position_perso.move(30, 0)
-        # Re-paste
-        background = pygame.image.load("images/background.jpg").convert()
-        perso = pygame.image.load("images/macgyver.png").convert_alpha()
+                    player.position_perso = player.position_perso.move(sprites_size, 0)
+        # Re-paste images
+        background = pygame.image.load(background_file).convert()
+        perso = pygame.image.load(perso_file).convert_alpha()
         window.blit(background, (0, 0))
         level.display_maze(window)
         window.blit(perso, (player.position_perso))
