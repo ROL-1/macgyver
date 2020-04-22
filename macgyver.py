@@ -36,7 +36,7 @@ def main():
                     player.position_perso = player.position_perso.move(30, 0)
         # Re-paste
         background = pygame.image.load("images/background.jpg").convert()
-        perso = pygame.image.load("images/perso.png").convert_alpha()
+        perso = pygame.image.load("images/macgyver.png").convert_alpha()
         window.blit(background, (0, 0))
         level.display_maze(window)
         window.blit(perso, (player.position_perso))
