@@ -24,7 +24,7 @@ perso_file = "images/macgyver.png"
 sprites_size = 30
 
 # Window size (x pixels, y pixels)
-windows_size = (450, 450)
+window_size = (450, 450)
 
 
 ################ Pygame parameters ################
