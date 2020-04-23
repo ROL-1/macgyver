@@ -4,7 +4,6 @@ from player import *
 import pygame
 from pygame.locals import *
 from config import *
-import os
 
 
 def main():
@@ -21,21 +20,20 @@ def main():
     # Player movements
     player = Player(level)
     inventory = []
-    set(inventory)
 
 
 ################################## GAME LOOP ################################
     pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
     pygame.time.Clock().tick(time_clock_tick)
     loop = 1
-    sprite = sprites_size    
+    sprite = sprites_size
     while loop:
         for event in pygame.event.get():
             # Close window
             if event.type == QUIT:
                 loop = 0
             # Keyboard reactions
-            if event.type == KEYDOWN:                
+            if event.type == KEYDOWN:
                 if event.key == K_UP:
                     position_perso = player.movement('up')
                 if event.key == K_DOWN:
@@ -43,24 +41,25 @@ def main():
                 if event.key == K_LEFT:
                     position_perso = player.movement('left')
                 if event.key == K_RIGHT:
-                    position_perso = player.movement('right')                    
-        
+                    position_perso = player.movement('right')
+
         # Check Exit
         if (player.x, player.y) == level.position_outdoor:
             print('YOU WIN!')
             loop = 0
 
-        # Check Inventory    
+        # Check Inventory
         player.inventory(level, inventory)
 
-        # Meeting BadGuy     
+        # Meeting BadGuy
         if (player.x, player.y) == level.position_badguy:
-            if len(set(inventory)) != 3:
+            if len(inventory) != 3:
                 print('YOU LOOSE')
                 loop = 0
             else:
-                print('BadGuy is Sleeping !\nBadGuy is Sleeping !\n')                    
-                     
+                level.badguy_sleeping = True
+                print('BadGuy is Sleeping !\nBadGuy is Sleeping !\n')
+
         # Re-paste images
         background = pygame.image.load(background_file).convert()
         perso = pygame.image.load(perso_file).convert_alpha()
@@ -69,30 +68,6 @@ def main():
         window.blit(perso, (player.x*sprite, player.y*sprite))
         # Refresh
         pygame.display.flip()
-        
 ################################# END GAME LOOP ##############################
 
-
 main()
-
-
-############################### TO DO ######################
-#  Loots:
-#     """Rules when MacGyver come on Loots cell"""
-#     # Erase the loot on the graph and make a empty cell
-#     # Add the loot in the Inventory list
-
-
-# #  Inventory:
-#     """Return True when all items are looted"""
-#     #list of objects on MacGyver
-
-
-#  Badguy:
-#     """Rules when MacGyver come on BadGuy cell"""
-
-#     # Check Inventory list
-#     # Kill MacGyver
-#     # Is killed by MacGyver
-
-############################ END TO DO ######################
