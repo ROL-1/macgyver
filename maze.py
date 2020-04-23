@@ -2,6 +2,7 @@
 import pygame
 from pygame.locals import *
 from config import *
+from player import *
 import os
 
 
@@ -11,6 +12,7 @@ class Create_maze:
     def __init__(self):
         """Load maze file."""
         self.MAZE_FILE = level_config1_file
+        
 
     def load_maze(self):
         """Read maze file and return a ndarray."""
@@ -36,7 +38,7 @@ class Create_maze:
         badguy = pygame.image.load(badguy_file).convert_alpha()
         ether = pygame.image.load(ether_file).convert_alpha()
         needle = pygame.image.load(needle_file).convert_alpha()
-        pipe = pygame.image.load(pipe_file).convert_alpha()
+        pipe = pygame.image.load(pipe_file).convert_alpha()              
                 
         sprite = sprites_size
         for x in range(len(self.maze)):
@@ -44,15 +46,19 @@ class Create_maze:
                 if self.maze[y][x] == 'W':
                     window.blit(wall, (sprite*x, sprite*y))
                 if self.maze[y][x] == 'O':
-                    window.blit(outdoor, (sprite*x, sprite*y))
                     self.position_outdoor =(x,y)
-                if self.maze[y][x] == 'G':
+                    window.blit(outdoor, (sprite*x, sprite*y))                    
+                if self.maze[y][x] == 'G':                    
+                    self.position_badguy =(x,y)
                     window.blit(badguy, (sprite*x, sprite*y))
-                if self.maze[y][x] == 'T':
+                if self.maze[y][x] == 'T':                    
+                    self.position_ether =(x,y)
                     window.blit(ether, (sprite*x, sprite*y))
-                if self.maze[y][x] == 'N':
+                if self.maze[y][x] == 'N':                   
+                    self.position_needle =(x,y)
                     window.blit(needle, (sprite*x, sprite*y))
-                if self.maze[y][x] == 'P':
+                if self.maze[y][x] == 'P':                    
+                    self.position_pipe =(x,y)
                     window.blit(pipe, (sprite*x, sprite*y))
 
     def perso_start_position(self,window):
@@ -60,5 +66,5 @@ class Create_maze:
         for x in range(len(self.maze)):
             for y in range(len(self.maze)):
                 if self.maze[y][x] == 'M':
-                        perso_start_position = (y, x)
+                        perso_start_position = (x, y)
         self.perso_start_position = perso_start_position

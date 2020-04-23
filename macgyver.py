@@ -11,7 +11,7 @@ def main():
     """Launch functions."""
     pygame.init()
     # Load window
-    window = pygame.display.set_mode(windows_size)
+    window = pygame.display.set_mode(window_size)
     # Load & generate the maze from the file
     level = Create_maze()
     level.load_maze()
@@ -20,14 +20,15 @@ def main():
     level.perso_start_position(window)
     # Player movements
     player = Player(level)
+    inventory = []
+    set(inventory)
 
 
 ################################## GAME LOOP ################################
     pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
     pygame.time.Clock().tick(time_clock_tick)
     loop = 1
-    sprite = sprites_size
-    position_perso = level.perso_start_position
+    sprite = sprites_size    
     while loop:
         for event in pygame.event.get():
             # Close window
@@ -43,9 +44,23 @@ def main():
                     position_perso = player.movement('left')
                 if event.key == K_RIGHT:
                     position_perso = player.movement('right')                    
+        
+        # Check Exit
         if (player.x, player.y) == level.position_outdoor:
             print('YOU WIN!')
-            loop = 0          
+            loop = 0
+
+        # Check Inventory    
+        player.inventory(level, inventory)
+
+        # Meeting BadGuy     
+        if (player.x, player.y) == level.position_badguy:
+            if len(set(inventory)) != 3:
+                print('YOU LOOSE')
+                loop = 0
+            else:
+                print('BadGuy is Sleeping !\nBadGuy is Sleeping !\n')                    
+                     
         # Re-paste images
         background = pygame.image.load(background_file).convert()
         perso = pygame.image.load(perso_file).convert_alpha()
