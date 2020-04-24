@@ -1,9 +1,10 @@
 """Main file for MacGiver maze game."""
-from maze import *
-from player import *
+from maze import Create_maze
+from player import Player
 import pygame
 from pygame.locals import *
 from config import *
+from config import sprite
 
 
 def main():
@@ -16,7 +17,7 @@ def main():
     level.load_maze()
     # Display the maze
     level.display_maze(window)
-    level.perso_start_position(window)
+    level.perso_start_coord(window)
     # Player movements
     player = Player(level)
     inventory = []
@@ -26,7 +27,6 @@ def main():
     pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
     pygame.time.Clock().tick(time_clock_tick)
     loop = 1
-    sprite = sprites_size
     while loop:
         for event in pygame.event.get():
             # Close window
@@ -35,30 +35,33 @@ def main():
             # Keyboard reactions
             if event.type == KEYDOWN:
                 if event.key == K_UP:
-                    position_perso = player.movement('up')
+                    coord_perso = player.movement('up')
                 if event.key == K_DOWN:
-                    position_perso = player.movement('down')
+                    coord_perso = player.movement('down')
                 if event.key == K_LEFT:
-                    position_perso = player.movement('left')
+                    coord_perso = player.movement('left')
                 if event.key == K_RIGHT:
-                    position_perso = player.movement('right')
-
-        # Check Exit
-        if (player.x, player.y) == level.position_outdoor:
-            print('YOU WIN!')
-            loop = 0
-
+                    coord_perso = player.movement('right')
+   
         # Check Inventory
         player.inventory(level, inventory)
 
         # Meeting BadGuy
-        if (player.x, player.y) == level.position_badguy:
+        if (player.x, player.y) == level.coord_badguy:
             if len(inventory) != 3:
-                print('YOU LOOSE')
+                print('YOU LOOSE.')
                 loop = 0
             else:
                 level.badguy_sleeping = True
-                print('BadGuy is Sleeping !\nBadGuy is Sleeping !\n')
+
+        # Check Exit
+        if (player.x, player.y) == level.coord_outdoor:
+            if level.badguy_sleeping is True:
+                print('YOU WIN!')
+                loop = 0  
+            else:
+                print('YOU LOOSE.')    
+                loop = 0                       
 
         # Re-paste images
         background = pygame.image.load(background_file).convert()
@@ -70,4 +73,6 @@ def main():
         pygame.display.flip()
 ################################# END GAME LOOP ##############################
 
-main()
+if __name__ == "__main__":
+    
+    main()
