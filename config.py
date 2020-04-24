@@ -18,11 +18,13 @@ obj1_file = "images/ether.png"
 obj2_file = "images/needle.png"
 obj3_file = "images/pipe.png"
 
-
 ####################################################
 
 # Sprites sizes (pixels)
 sprite = 30
+
+# Number of objetcs
+nb_obj = 3
 
 
 

@@ -15,13 +15,13 @@ def main():
     # Load & generate the maze from the file
     level = Create_maze()
     level.load_maze()
+    level.empty_spaces()
     # Display the maze
     level.display_maze(window)
     level.perso_start_coord(window)
     # Player movements
     player = Player(level)
     inventory = []
-
 
 ################################## GAME LOOP ################################
     pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
@@ -76,3 +76,9 @@ def main():
 if __name__ == "__main__":
     
     main()
+
+
+####################### TO DO ##############
+# player can't exit the frame
+# config number of objects
+############################################

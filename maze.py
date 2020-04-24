@@ -4,6 +4,8 @@ from pygame.locals import *
 from config import *
 from player import Player
 from config import sprite
+from random import sample
+import os
 
 
 class Create_maze:
@@ -30,7 +32,19 @@ class Create_maze:
                         maze_frame_line.append(caracter)
                 maze_frame.append(maze_frame_line)
             self.maze = maze_frame
-            print(self.maze)  # To Clean
+
+    def empty_spaces(self):
+        """Looking for empty spaces in maze to load objects."""
+        empty_spaces_coord = []        
+        for x in range(len(self.maze)):
+                    for y in range(len(self.maze)):
+                        if self.maze[y][x] == 'E':
+                            empty_spaces_coord.append((x,y))
+        # Objects coordinates list:
+        list_coord_obj = sample(empty_spaces_coord, nb_obj)
+        self.coord_obj1 = list_coord_obj[0]
+        self.coord_obj2 = list_coord_obj[1]
+        self.coord_obj3 = list_coord_obj[2]     
 
     def display_maze(self, window):
         """Display maze using load_maze."""
@@ -53,19 +67,13 @@ class Create_maze:
                 if self.maze[y][x] == 'G':
                     self.coord_badguy = (x, y)
                     if self.badguy_sleeping is not True:
-                        window.blit(badguy, (sprite*x, sprite*y))
-                if self.maze[y][x] == 'T':
-                    self.coord_obj1 = (x, y)
-                    if self.obj1_looted is not True:
-                        window.blit(obj1, (sprite*x, sprite*y))
-                if self.maze[y][x] == 'N':
-                    self.coord_obj2 = (x, y)
-                    if self.obj2_looted is not True:
-                        window.blit(obj2, (sprite*x, sprite*y))
-                if self.maze[y][x] == 'P':
-                    self.coord_obj3 = (x, y)
-                    if self.obj3_looted is not True:
-                        window.blit(obj3, (sprite*x, sprite*y))
+                        window.blit(badguy, (sprite*x, sprite*y))    
+        if self.obj1_looted is not True:
+            window.blit(obj1, (sprite*self.coord_obj1[0],sprite*self.coord_obj1[1]))
+        if self.obj2_looted is not True:
+            window.blit(obj2, (sprite*self.coord_obj2[0], sprite*self.coord_obj2[1]))
+        if self.obj3_looted is not True:
+            window.blit(obj3, (sprite*self.coord_obj3[0], sprite*self.coord_obj3[1]))
 
     def perso_start_coord(self, window):
         """Generate coordinates for perso start position."""
