@@ -31,7 +31,6 @@ class Create_maze:
                         maze_frame_line.append(caracter)
                 maze_frame.append(maze_frame_line)
             self.maze = maze_frame
-# WIP : TO DO : Call fct who create dict for auto name ##################
 
     def empty_spaces(self):
         """Looking for empty spaces in maze to load objects."""
@@ -47,15 +46,9 @@ class Create_maze:
         var = "obj"
         def fct_dict_(n, value):
             dict_[var+str(n)] = value
-
         for i in range(nb_obj):
             fct_dict_(i+1, list_coord_obj[i])
         self.dict_obj = dict_
-        print(self.dict_obj)                        # To Clean
-        for j,k in self.dict_obj.items():           # To Clean
-            print(j,k)                              # To Clean
-            print(type(j),type(k))                  # To Clean
-        os.system('pause')                          # To Clean
         # # for j, k in self.dict_obj.items()
         # self.coord_obj1 = self.dict_obj['obj1']
         # self.coord_obj2 = self.dict_obj['obj2']
@@ -98,25 +91,21 @@ class Create_maze:
     def display_objects(self, window):
         """Display objects in the maze if not looted"""
         # # Load objects images
-        print(objects_files)        
-        for i in range(len(objects_files)):
-            for file in objects_files:
-                for key in self.dict_obj.keys():
-                    key = pygame.image.load(file).convert_alpha()
-                    print(key)
-    
-                    
-        os.system('pause')        
-
-
-        # obj1 = pygame.image.load(obj1_file).convert_alpha()
+        # print(objects_files)        
+        # for i in range(len(objects_files)):
+        #     for file in objects_files:
+        #         for key in self.dict_obj.keys():
+        #             key = pygame.image.load(file).convert_alpha()
+        #             print(key)         
+      
+        obj1surface = pygame.image.load(objects_files[0]).convert_alpha()
         # obj2 = pygame.image.load(obj2_file).convert_alpha()
         # obj3 = pygame.image.load(obj3_file).convert_alpha()
 # WIP ####################################################################
         # for i in range (nb_obj):
         # print(self.dict_obj['self.obj1'][0])
         for j, k in self.dict_obj.items():                        
-                window.blit(obj1, (sprite*k[0], sprite*k[1]))
+                window.blit(obj1surface, (sprite*k[0], sprite*k[1]))
         
  ###########################################################################################      
         # if self.obj1_looted is not True:
