@@ -50,13 +50,9 @@ class Create_maze:
         """Display maze using load_maze."""
         # Maze files
         outdoor = pygame.image.load(outdoor_file).convert_alpha()
-        wall = pygame.image.load(wall_file).convert_alpha()
-        # BadGuy and Objects files
+        wall = pygame.image.load(wall_file).convert_alpha()        
         badguy = pygame.image.load(badguy_file).convert_alpha()
-        obj1 = pygame.image.load(obj1_file).convert_alpha()
-        obj2 = pygame.image.load(obj2_file).convert_alpha()
-        obj3 = pygame.image.load(obj3_file).convert_alpha()
-
+        
         for x in range(len(self.maze)):
             for y in range(len(self.maze)):
                 if self.maze[y][x] == 'W':
@@ -67,7 +63,14 @@ class Create_maze:
                 if self.maze[y][x] == 'G':
                     self.coord_badguy = (x, y)
                     if self.badguy_sleeping is not True:
-                        window.blit(badguy, (sprite*x, sprite*y))    
+                        window.blit(badguy, (sprite*x, sprite*y))
+    
+    def display_objects(self,window):
+        """Display objects in the maze if not looted"""
+        # Objects files
+        obj1 = pygame.image.load(obj1_file).convert_alpha()
+        obj2 = pygame.image.load(obj2_file).convert_alpha()
+        obj3 = pygame.image.load(obj3_file).convert_alpha()
         if self.obj1_looted is not True:
             window.blit(obj1, (sprite*self.coord_obj1[0],sprite*self.coord_obj1[1]))
         if self.obj2_looted is not True:
