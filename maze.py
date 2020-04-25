@@ -20,8 +20,7 @@ class Create_maze:
 
     def load_maze(self):
         """Read maze file and return the maze frame (list type)."""
-        with open(self.MAZE_FILE, 'r') as maze_file:
-            # Read 17 to 32 lines only
+        with open(self.MAZE_FILE, 'r') as maze_file:           
             maze_file_line = maze_file.readlines()
             maze_frame = []
             for line in maze_file_line:
@@ -91,10 +90,11 @@ class Create_maze:
     def display_objects(self, window):
         """Display objects in the maze if not looted"""
         # Load objects images
-        for i in range(len(self.dict_obj)):
-            i = pygame.image.load(objects_files[i]).convert_alpha()
-        for coord in self.dict_obj.values():                                     
-            window.blit(i, (sprite*coord[0], sprite*coord[1]))
+        i = 0
+        while i < len(self.dict_obj):            
+            for coord in self.dict_obj.values():                                     
+                window.blit(pygame.image.load(objects_files[i]).convert_alpha(), (sprite*coord[0], sprite*coord[1]))
+                i +=1
         # os.system('pause')
         # obj1surface = pygame.image.load(objects_files[0]).convert_alpha()
         # obj2 = pygame.image.load(obj2_file).convert_alpha()
