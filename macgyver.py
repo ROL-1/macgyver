@@ -68,6 +68,7 @@ def main():
         perso = pygame.image.load(perso_file).convert_alpha()
         window.blit(background, (0, 0))
         level.display_maze(window)
+        level.display_objects(window)
         window.blit(perso, (player.x*sprite, player.y*sprite))
         # Refresh
         pygame.display.flip()
@@ -75,9 +76,13 @@ def main():
 
 if __name__ == "__main__":
     
+<<<<<<< Updated upstream
     main()
 
 
 ####################### TO DO ##############
 # config number of objects
 ############################################
+=======
+    main()
+>>>>>>> Stashed changes
