@@ -11,7 +11,7 @@ def main():
     """Launch functions."""
     pygame.init()
     # Load window
-    window = pygame.display.set_mode(window_size)
+    window = pygame.display.set_mode(window_size,RESIZABLE)
     # Load & generate the maze from the file
     level = Create_maze()
     level.load_maze()
@@ -30,7 +30,7 @@ def main():
     while loop:
         for event in pygame.event.get():
             # Close window
-            if event.type == QUIT:
+            if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                 loop = 0
             # Keyboard reactions
             if event.type == KEYDOWN:
@@ -77,4 +77,3 @@ def main():
 if __name__ == "__main__":
     
     main()
-
