@@ -48,7 +48,7 @@ def main():
 
         # Meeting BadGuy
         if (player.x, player.y) == level.coord_badguy:
-            if len(inventory) != 3:
+            if len(inventory) != nb_obj:
                 print('YOU LOOSE.')
                 loop = 0
             else:
@@ -79,6 +79,5 @@ if __name__ == "__main__":
 
 
 ####################### TO DO ##############
-# player can't exit the frame
 # config number of objects
 ############################################
