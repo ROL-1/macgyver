@@ -1,5 +1,4 @@
 """Player functions file for MacGiver Maze game."""
-import os
 
 class Player:
     """Player rules for movements."""
