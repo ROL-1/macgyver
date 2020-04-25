@@ -2,9 +2,12 @@
 from maze import Create_maze
 from player import Player
 import pygame
-from pygame.locals import *
-from config import *
-from config import sprite
+from pygame.locals import \
+    QUIT, KEYDOWN, K_ESCAPE, K_UP, K_DOWN, K_LEFT, K_RIGHT
+from config import \
+    sprite, key_set_repeat_delay, key_set_repeat_interval, \
+    time_clock_tick, window_size, background_file, perso_file, nb_obj
+import os
 
 
 def main():
@@ -21,28 +24,29 @@ def main():
     level.perso_start_coord(window)
     # Player movements
     player = Player(level)
-    inventory = []
+    inventory = []  
 
-################################## GAME LOOP ################################
+# GAME LOOP ###################################################################
     pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
     pygame.time.Clock().tick(time_clock_tick)
     loop = 1
     while loop:
         for event in pygame.event.get():
             # Close window
-            if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
+            if event.type == QUIT \
+             or event.type == KEYDOWN and event.key == K_ESCAPE:
                 loop = 0
             # Keyboard reactions
             if event.type == KEYDOWN:
                 if event.key == K_UP:
-                    coord_perso = player.movement('up')
-                if event.key == K_DOWN:
-                    coord_perso = player.movement('down')
-                if event.key == K_LEFT:
-                    coord_perso = player.movement('left')
-                if event.key == K_RIGHT:
-                    coord_perso = player.movement('right')
-   
+                    player.movement('up')
+                elif event.key == K_DOWN:
+                    player.movement('down')
+                elif event.key == K_LEFT:
+                    player.movement('left')
+                elif event.key == K_RIGHT:
+                    player.movement('right')
+
         # Check Inventory
         player.inventory(level, inventory)
 
@@ -58,10 +62,10 @@ def main():
         if (player.x, player.y) == level.coord_outdoor:
             if level.badguy_sleeping is True:
                 print('YOU WIN!')
-                loop = 0  
+                loop = 0
             else:
-                print('YOU LOOSE.')    
-                loop = 0                       
+                print('Bad guy is still awake.\nYOU CHEAT')
+                loop = 0
 
         # Re-paste images
         background = pygame.image.load(background_file).convert()
@@ -72,8 +76,10 @@ def main():
         window.blit(perso, (player.x*sprite, player.y*sprite))
         # Refresh
         pygame.display.flip()
-################################# END GAME LOOP ##############################
+
+# END GAME LOOP ###############################################################
+
 
 if __name__ == "__main__":
-    
+
     main()
