@@ -76,13 +76,5 @@ def main():
 
 if __name__ == "__main__":
     
-<<<<<<< Updated upstream
     main()
 
-
-####################### TO DO ##############
-# config number of objects
-############################################
-=======
-    main()
->>>>>>> Stashed changes
