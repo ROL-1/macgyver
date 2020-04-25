@@ -1,6 +1,5 @@
 """Player functions file for MacGiver Maze game."""
 
-
 class Player:
     """Player rules for movements."""
 
@@ -16,17 +15,21 @@ class Player:
     def movement(self, move):
         """Rules for player movements."""
         if move == 'up':
-            if self.level.maze[self.y-1][self.x] != 'W':
-                self.y -= 1
+            if self.y-1 >= 0:
+                if self.level.maze[self.y-1][self.x] != 'W':
+                        self.y -= 1
         if move == 'down':
-            if self.level.maze[self.y+1][self.x] != 'W':
-                self.y += 1
+            if self.y+1 < len(self.level.maze):
+                if self.level.maze[self.y+1][self.x] != 'W':
+                    self.y += 1
         if move == 'left':
-            if self.level.maze[self.y][self.x-1] != 'W':
-                self.x -= 1
+            if self.x-1 >= 0:
+                if self.level.maze[self.y][self.x-1] != 'W':
+                    self.x -= 1
         if move == 'right':
-            if self.level.maze[self.y][self.x+1] != 'W':
-                self.x += 1
+            if self.x+1 < len(self.level.maze):
+                if self.level.maze[self.y][self.x+1] != 'W':                 
+                    self.x += 1
 
     def inventory(self, level, inventory):
         """Rules for loot."""
