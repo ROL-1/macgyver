@@ -90,22 +90,20 @@ class Create_maze:
 
     def display_objects(self, window):
         """Display objects in the maze if not looted"""
-        # # Load objects images
-        # print(objects_files)        
-        # for i in range(len(objects_files)):
-        #     for file in objects_files:
-        #         for key in self.dict_obj.keys():
-        #             key = pygame.image.load(file).convert_alpha()
-        #             print(key)         
-      
-        obj1surface = pygame.image.load(objects_files[0]).convert_alpha()
+        # Load objects images
+        for i in range(len(self.dict_obj)):
+            i = pygame.image.load(objects_files[i]).convert_alpha()
+        for coord in self.dict_obj.values():                                     
+            window.blit(i, (sprite*coord[0], sprite*coord[1]))
+        # os.system('pause')
+        # obj1surface = pygame.image.load(objects_files[0]).convert_alpha()
         # obj2 = pygame.image.load(obj2_file).convert_alpha()
         # obj3 = pygame.image.load(obj3_file).convert_alpha()
 # WIP ####################################################################
         # for i in range (nb_obj):
         # print(self.dict_obj['self.obj1'][0])
-        for j, k in self.dict_obj.items():                        
-                window.blit(obj1surface, (sprite*k[0], sprite*k[1]))
+        # for j, k in self.dict_obj.items():                        
+        #         window.blit(obj1surface, (sprite*k[0], sprite*k[1]))
         
  ###########################################################################################      
         # if self.obj1_looted is not True:

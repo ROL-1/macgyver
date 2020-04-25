@@ -31,8 +31,8 @@ class Player:
 
     def inventory(self, level, inventory):
         """Rules for loot."""      
-        for key, value in level.dict_obj.items():
-            if (self.x, self.y) == value \
-             and key not in inventory:                
-                inventory.append(key)
-        print(inventory)
+        for obj_name, coord in level.dict_obj.items():
+            if (self.x, self.y) == coord \
+             and obj_name not in inventory:                
+                inventory.append(obj_name)
+

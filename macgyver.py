@@ -49,6 +49,7 @@ def main():
 
         # Check Inventory
         player.inventory(level, inventory)
+        print(inventory)# To Clean
 
         # Meeting BadGuy
         if (player.x, player.y) == level.coord_badguy:
