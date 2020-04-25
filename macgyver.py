@@ -11,7 +11,7 @@ def main():
     """Launch functions."""
     pygame.init()
     # Load window
-    window = pygame.display.set_mode(window_size,RESIZABLE)
+    window = pygame.display.set_mode(window_size)
     # Load & generate the maze from the file
     level = Create_maze()
     level.load_maze()
