@@ -1,5 +1,5 @@
 """Player functions file for MacGiver Maze game."""
-import os
+
 
 class Player:
     """Player rules for movements."""
@@ -9,6 +9,7 @@ class Player:
         self.level = level
         self.x = self.level.perso_start_coord[0]
         self.y = self.level.perso_start_coord[1]
+        self.inventory_list = []
 
     def movement(self, move):
         """Rules for player movements."""
@@ -29,10 +30,10 @@ class Player:
              and self.level.maze[self.y][self.x+1] != 'W':
                 self.x += 1
 
-    def inventory(self, level, inventory):
-        """Rules for loot."""      
+    def inventory(self, level):
+        """Rules for loot."""
         for obj_name, coord in level.dict_obj.items():
             if (self.x, self.y) == coord \
-             and obj_name not in inventory:                
-                inventory.append(obj_name)
-
+             and obj_name not in self.inventory_list:
+                self.inventory_list.append(obj_name)
+                self.inventory_list.sort()

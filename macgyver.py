@@ -7,7 +7,6 @@ from pygame.locals import \
 from config import \
     sprite, key_set_repeat_delay, key_set_repeat_interval, \
     time_clock_tick, window_size, background_file, perso_file, nb_obj
-import os
 
 
 def main():
@@ -24,7 +23,7 @@ def main():
     level.perso_start_coord(window)
     # Player movements
     player = Player(level)
-    inventory = []  
+    inventory = []
 
 # GAME LOOP ###################################################################
     pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
@@ -47,9 +46,9 @@ def main():
                 elif event.key == K_RIGHT:
                     player.movement('right')
 
-        # Check Inventory
-        player.inventory(level, inventory)
-        print(inventory)# To Clean
+        # Create Inventory
+        player.inventory(level)
+        player.inventory_list = inventory
 
         # Meeting BadGuy
         if (player.x, player.y) == level.coord_badguy:
@@ -73,7 +72,7 @@ def main():
         perso = pygame.image.load(perso_file).convert_alpha()
         window.blit(background, (0, 0))
         level.display_maze(window)
-        level.display_objects(window)
+        level.display_objects(window, inventory)
         window.blit(perso, (player.x*sprite, player.y*sprite))
         # Refresh
         pygame.display.flip()

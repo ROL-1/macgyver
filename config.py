@@ -1,7 +1,8 @@
 """References and parameters for files."""
 
 # maze construction file
-level_config_file = "level_config_1.json"
+# level_config_file = "level_config_1.json"
+level_config_file = "level_config_2.json"
 
 
 # Images ###################################
@@ -18,7 +19,8 @@ badguy_file = "images/badguy.png"
 objects_files = [
     "images/ether.png",
     "images/needle.png",
-    "images/pipe.png"
+    "images/pipe.png",
+    "images/syringe.png"
 ]
 ############################################
 
@@ -26,7 +28,7 @@ objects_files = [
 sprite = 30
 
 # Number of objetcs
-nb_obj = 3
+nb_obj = 4
 
 
 # Window size (x pixels, y pixels)

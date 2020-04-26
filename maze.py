@@ -1,10 +1,8 @@
 """Maze display's file for MacGiver Maze game."""
 import pygame
-from config import *
-# from config import sprite, level_config_file, nb_obj, outdoor_file, wall_file,\
-#     badguy_file, obj1_file, obj2_file, obj3_file
+from config import sprite, level_config_file, nb_obj, outdoor_file, \
+ wall_file, badguy_file, objects_files
 from random import sample
-import os
 
 
 class Create_maze:
@@ -14,13 +12,10 @@ class Create_maze:
         """Load maze file."""
         self.MAZE_FILE = level_config_file
         self.badguy_sleeping = False
-        self.obj1_looted = False
-        self.obj2_looted = False
-        self.obj3_looted = False
 
     def load_maze(self):
         """Read maze file and return the maze frame (list type)."""
-        with open(self.MAZE_FILE, 'r') as maze_file:           
+        with open(self.MAZE_FILE, 'r') as maze_file:
             maze_file_line = maze_file.readlines()
             maze_frame = []
             for line in maze_file_line:
@@ -32,7 +27,7 @@ class Create_maze:
             self.maze = maze_frame
 
     def empty_spaces(self):
-        """Looking for empty spaces in maze to load objects."""
+        """Check for empty spaces in maze to load objects."""
         empty_spaces_coord = []
         for x in range(len(self.maze)):
             for y in range(len(self.maze)):
@@ -40,32 +35,15 @@ class Create_maze:
                     empty_spaces_coord.append((x, y))
         # Objects coordinates list:
         list_coord_obj = sample(empty_spaces_coord, nb_obj)
-        #Create dictionary of objects positions
+        # Create dictionary of objects positions
         dict_ = {}
         var = "obj"
+
         def fct_dict_(n, value):
             dict_[var+str(n)] = value
         for i in range(nb_obj):
             fct_dict_(i+1, list_coord_obj[i])
         self.dict_obj = dict_
-        # # for j, k in self.dict_obj.items()
-        # self.coord_obj1 = self.dict_obj['obj1']
-        # self.coord_obj2 = self.dict_obj['obj2']
-        # self.coord_obj3 = self.dict_obj['obj3']
-
-        # for j, k in dict_obj.items():
-        #     print(j,k)
-        #     print(type(j),type(k))
-        #     j = k
-        #     print(f'le terme-clef {j} est associé à la coord-valeur{k}')
-
-        # os.system('pause')        
-###########################################################
-        # self.coord_obj1 = list_coord_obj[0]
-        # self.coord_obj2 = list_coord_obj[1]
-        # self.coord_obj3 = list_coord_obj[2]
-##################################################################################
-##################################################################################        
 
     def display_maze(self, window):
         """Display maze using load_maze."""
@@ -87,33 +65,17 @@ class Create_maze:
                     if self.badguy_sleeping is not True:
                         window.blit(badguy, (sprite*x, sprite*y))
 
-    def display_objects(self, window):
-        """Display objects in the maze if not looted"""
+    def display_objects(self, window, inventory):
+        """Display objects in the maze if not looted."""
         # Load objects images
         i = 0
-        while i < len(self.dict_obj):            
-            for coord in self.dict_obj.values():                                     
-                window.blit(pygame.image.load(objects_files[i]).convert_alpha(), (sprite*coord[0], sprite*coord[1]))
-                i +=1
-        # os.system('pause')
-        # obj1surface = pygame.image.load(objects_files[0]).convert_alpha()
-        # obj2 = pygame.image.load(obj2_file).convert_alpha()
-        # obj3 = pygame.image.load(obj3_file).convert_alpha()
-# WIP ####################################################################
-        # for i in range (nb_obj):
-        # print(self.dict_obj['self.obj1'][0])
-        # for j, k in self.dict_obj.items():                        
-        #         window.blit(obj1surface, (sprite*k[0], sprite*k[1]))
-        
- ###########################################################################################      
-        # if self.obj1_looted is not True:
-        #     window.blit(obj1, (sprite*self.coord_obj1[0], sprite*self.coord_obj1[1]))
-        # if self.obj2_looted is not True:
-        #     window.blit(obj2, (sprite*self.coord_obj2[0], sprite*self.coord_obj2[1]))
-        # if self.obj3_looted is not True:
-        #     window.blit(obj3, (sprite*self.coord_obj3[0], sprite*self.coord_obj3[1]))
-############################################################################################
-############################################################################################
+        while i < len(self.dict_obj):
+            for obj_name, coord in self.dict_obj.items():
+                py_image = pygame.image.load(objects_files[i]).convert_alpha()
+                if obj_name not in inventory:
+                    window.blit(py_image, (sprite*coord[0], sprite*coord[1]))
+                i += 1
+
     def perso_start_coord(self, window):
         """Generate coordinates for perso start position."""
         for x in range(len(self.maze)):
