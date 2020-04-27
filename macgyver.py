@@ -1,5 +1,5 @@
 """Main file for MacGiver maze game."""
-from maze import Create_maze
+from maze import Maze
 from player import Player
 import pygame
 from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
@@ -15,7 +15,7 @@ def main():
     # Load window
     window = pygame.display.set_mode(window_size)
     # Load & generate the maze from the file
-    level = Create_maze()
+    level = Maze()
     level.load_maze()
     level.empty_spaces()
     # Display the maze

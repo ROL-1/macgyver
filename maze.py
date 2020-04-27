@@ -5,7 +5,7 @@ from config import sprite, level_config_file, nb_obj, outdoor_file, \
 from random import sample, choice
 
 
-class Create_maze:
+class Maze:
     """Load, generate and display the maze."""
 
     def __init__(self):
