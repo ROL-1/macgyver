@@ -2,7 +2,7 @@
 import pygame
 from config import sprite, level_config_file, nb_obj, outdoor_file, \
  wall_file, badguy_file, objects_files
-from random import sample
+from random import sample, choice
 
 
 class Create_maze:
@@ -10,7 +10,7 @@ class Create_maze:
 
     def __init__(self):
         """Load maze file."""
-        self.MAZE_FILE = level_config_file
+        self.MAZE_FILE = choice(level_config_file)
         self.badguy_sleeping = False
 
     def load_maze(self):
@@ -35,11 +35,12 @@ class Create_maze:
                     empty_spaces_coord.append((x, y))
         # Objects coordinates list:
         list_coord_obj = sample(empty_spaces_coord, nb_obj)
-        # Create dictionary of objects positions
+        # Create dictionary of objects positions : 'objx':(x,y)
         dict_ = {}
         var = "obj"
 
         def fct_dict_(n, value):
+            """Increment name for dictionary."""
             dict_[var+str(n)] = value
         for i in range(nb_obj):
             fct_dict_(i+1, list_coord_obj[i])
