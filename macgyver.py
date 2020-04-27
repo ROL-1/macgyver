@@ -2,11 +2,11 @@
 from maze import Create_maze
 from player import Player
 import pygame
-from pygame.locals import \
-    QUIT, KEYDOWN, K_ESCAPE, K_UP, K_DOWN, K_LEFT, K_RIGHT
+from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
 from config import \
     sprite, key_set_repeat_delay, key_set_repeat_interval, \
-    time_clock_tick, window_size, background_file, perso_file, nb_obj
+    time_clock_tick, window_size, background_file, perso_file, \
+    nb_obj, keys_events
 
 
 def main():
@@ -33,18 +33,14 @@ def main():
         for event in pygame.event.get():
             # Close window
             if event.type == QUIT \
-             or event.type == KEYDOWN and event.key == K_ESCAPE:
+             or event.type == KEYDOWN \
+             and event.key == K_ESCAPE:
                 loop = 0
             # Keyboard reactions
             if event.type == KEYDOWN:
-                if event.key == K_UP:
-                    player.movement('up')
-                elif event.key == K_DOWN:
-                    player.movement('down')
-                elif event.key == K_LEFT:
-                    player.movement('left')
-                elif event.key == K_RIGHT:
-                    player.movement('right')
+                for move in keys_events:
+                    if event.key == move:
+                        player.movement(move)
 
         # Create Inventory
         player.inventory(level)
@@ -52,6 +48,7 @@ def main():
 
         # Meeting BadGuy
         if (player.x, player.y) == level.coord_badguy:
+            # Check inventory
             if len(inventory) != nb_obj:
                 print('YOU LOOSE.')
                 loop = 0
@@ -60,6 +57,7 @@ def main():
 
         # Check Exit
         if (player.x, player.y) == level.coord_outdoor:
+            # Check if badguy is sleeping
             if level.badguy_sleeping is True:
                 print('YOU WIN!')
                 loop = 0
