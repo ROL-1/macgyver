@@ -1,33 +1,28 @@
-"""Maze display's file for MacGiver Maze game."""
+"""Maze generate's file for MacGiver maze game."""
 import pygame
-from config import sprite, level_config_file, nb_obj, outdoor_file, \
+from lib import functions
+from config import sprite, nb_obj, outdoor_file, \
  wall_file, badguy_file, objects_files
 from random import sample, choice
 
 
 class Maze:
-    """Load, generate and display the maze."""
+    """Generate the maze frame."""
 
     def __init__(self):
-        """Load maze file."""
-        self.MAZE_FILE = choice(level_config_file)
-        self.badguy_sleeping = False
-
-    def load_maze(self):
-        """Read maze file and return the maze frame (list type)."""
-        with open(self.MAZE_FILE, 'r') as maze_file:
-            maze_file_line = maze_file.readlines()
-            maze_frame = []
-            for line in maze_file_line:
-                maze_frame_line = []
-                for caracter in line:
-                    if caracter != '\n':
-                        maze_frame_line.append(caracter)
-                maze_frame.append(maze_frame_line)
-            self.maze = maze_frame
-
-    def empty_spaces(self):
-        """Check for empty spaces in maze to load objects."""
+        """ Create BadGuy status. Load maze file and create 'maze' list."""
+        # Boolean for Badguy status
+        self.badguy_sleeping = False         
+        # Select one file randomly
+        select_level = choice(functions.load_files('levels'))        
+        # Read .json and return a list
+        self.maze = functions.string_json(f'levels/{select_level}')['level_frame']
+        # Generate
+        self.objects_positions()
+ 
+    def objects_positions(self):
+        """Check for empty spaces in maze and create a list of objects positions"""
+        # Empty spaces coordinates list:
         empty_spaces_coord = []
         for x in range(len(self.maze)):
             for y in range(len(self.maze)):
@@ -35,16 +30,9 @@ class Maze:
                     empty_spaces_coord.append((x, y))
         # Objects coordinates list:
         list_coord_obj = sample(empty_spaces_coord, nb_obj)
-        # Create dictionary of objects positions : 'objx':(x,y)
-        dict_ = {}
-        var = "obj"
-
-        def fct_dict_(n, value):
-            """Increment name for dictionary."""
-            dict_[var+str(n)] = value
-        for i in range(nb_obj):
-            fct_dict_(i+1, list_coord_obj[i])
-        self.dict_obj = dict_
+        # Create dictionary of objects positions : 'obj'i+1:(x,y)   
+        for i in range(nb_obj):            
+            self.dict_obj = functions.name_inc('obj',i+1, list_coord_obj[i])
 
     def display_maze(self, window):
         """Display maze using load_maze."""

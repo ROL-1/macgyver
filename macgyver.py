@@ -15,9 +15,7 @@ def main():
     # Load window
     window = pygame.display.set_mode(window_size)
     # Load & generate the maze from the file
-    level = Maze()
-    level.load_maze()
-    level.empty_spaces()
+    level = Maze()   
     # Display the maze
     level.display_maze(window)
     level.perso_start_coord(window)

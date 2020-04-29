@@ -1,4 +1,4 @@
-"""Player functions file for MacGiver Maze game."""
+"""Player functions file for MacGiver maze game."""
 from config import keys_events
 
 
