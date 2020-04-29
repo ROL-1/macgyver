@@ -1,3 +1,5 @@
-venv/
 .vscode/
 __pycache__/
+venv/
+bash.exe.stackdump
+pyvenv.cfg

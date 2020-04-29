@@ -1,11 +1,6 @@
-"""References and parameters for files."""
+"""References and parameters for MacGiver maze game."""
 from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT
 
-# maze construction file
-level_config_file = [
- "level_config_1.json",
- "level_config_2.json"
-]
 # LEGEND FOR LEVEL CONFIG ####
 # W : is a Wall
 # E : is Empty
