@@ -8,29 +8,17 @@ from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT
 # B : is BadGuy start position
 # O : is the Outdoor (need to be next to BadGuy)
 
-
-# Images ###################################
-# Maze
-background_file = "images/background.jpg"
-outdoor_file = "images/outdoor.png"
-wall_file = "images/wall.png"
-badguy_file = "images/badguy.png"
-# Player
-perso_file = "images/macgyver.png"
-# Objects
-objects_files = [
-    "images/ether.png",
-    "images/needle.png",
-    "images/pipe.png",
-    # "images/syringe.png"
-]
-############################################
+# Levels repertory
+levels_rep = 'levels'
+# Images repertory
+img_rep = 'images\\*'
+obj_rep = 'images\\*\\*'
 
 # Sprites sizes (pixels)
 sprite = 30
 
 # Number of objetcs
-nb_obj = len(objects_files)
+nb_obj = 4
 
 
 # Window size (x pixels, y pixels)

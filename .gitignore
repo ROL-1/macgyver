@@ -1,5 +1,6 @@
 .vscode/
 __pycache__/
 venv/
+lib/__pycache__
 bash.exe.stackdump
 pyvenv.cfg
