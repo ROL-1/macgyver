@@ -1,8 +1,6 @@
 """Maze generate's file for MacGiver maze game."""
-import pygame
-from lib import functions
-from config import sprite, nb_obj, outdoor_file, \
- wall_file, badguy_file, objects_files
+from lib import funct
+from config import levels_rep, nb_obj
 from random import sample, choice
 
 
@@ -10,17 +8,17 @@ class Maze:
     """Generate the maze frame."""
 
     def __init__(self):
-        """ Create BadGuy status. Load maze file and create 'maze' list."""       
+        """Create BadGuy status. Load maze file and create 'maze' list."""
         # Select one file randomly
-        select_level = choice(functions.load_files('levels'))        
+        selected_level = choice(funct.list_files(levels_rep))
         # Read .json and return a list
-        self.maze = functions.string_json(f'levels/{select_level}')['level_frame']
+        self.maze = funct.string_json(selected_level)['level_']
         # Generate
         self.objects_positions()
         self.perso_start_coord()
- 
+
     def objects_positions(self):
-        """Check for empty spaces in maze and create a list of objects positions"""
+        """Check for empty spaces in maze and create a list of objects coord."""
         # Empty spaces coordinates list:
         empty_spaces_coord = []
         for x in range(len(self.maze)):
@@ -29,9 +27,9 @@ class Maze:
                     empty_spaces_coord.append((x, y))
         # Objects coordinates list:
         list_coord_obj = sample(empty_spaces_coord, nb_obj)
-        # Create dictionary of objects positions : 'obj'i+1:(x,y)   
-        for i in range(nb_obj):            
-            self.dict_obj = functions.name_inc('obj',i+1, list_coord_obj[i])
+        # Create dictionary of objects positions : 'obj'i+1:(x,y)
+        for i in range(nb_obj):
+            self.dict_obj = funct.name_inc('obj', i+1, list_coord_obj[i])
 
     def perso_start_coord(self):
         """Generate coordinates for perso start position."""
@@ -40,4 +38,3 @@ class Maze:
                 if self.maze[y][x] == 'M':
                     perso_start_coord = (x, y)
         self.perso_start_coord = perso_start_coord
-    

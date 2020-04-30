@@ -1,25 +1,23 @@
 """Main file for MacGiver maze game."""
-from display import Display
-from maze import Maze
-from player import Player
 import pygame
 from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
-from config import \
-    sprite, key_set_repeat_delay, key_set_repeat_interval, \
-    time_clock_tick, window_size, background_file, perso_file, \
-    nb_obj, keys_events
+from maze import Maze
+from player import Player
+from display import Display
+from config import key_set_repeat_delay, key_set_repeat_interval, \
+                   time_clock_tick, nb_obj, keys_events
 
 
 def main():
     """Launch functions."""
+    # Launch pygame
     pygame.init()
-    # Load window
-    window = pygame.display.set_mode(window_size)
     # Load & generate the maze from the file
-    level = Maze()    
+    level = Maze()
+    # Generate player firt position, movements and inventory
     player = Player(level)
     # Display the maze
-    display = Display(level,player)
+    display = Display(level, player)
 
 # GAME LOOP ###################################################################
     pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
@@ -39,9 +37,8 @@ def main():
                         player.movement(move)
 
         # Check Inventory
-        player.inventory(level)
-        # player.inventory_list = inventory
-        print(player.inventory_list) #To Clean
+        player.loot(level)
+
         # Meeting BadGuy
         if (player.x, player.y) == level.coord_badguy:
             # Check inventory
@@ -62,15 +59,7 @@ def main():
                 loop = 0
 
         # Re-paste images
-        display.repaste_display(level,player)
-        # background = pygame.image.load(background_file).convert()
-        # perso = pygame.image.load(perso_file).convert_alpha()
-        # window.blit(background, (0, 0))
-        # level.display_maze(window)
-        # level.display_objects(window, inventory)
-        # window.blit(perso, (player.x*sprite, player.y*sprite))
-        # # Refresh
-        # pygame.display.flip()
+        display.repaste_display(level, player)
 
 # END GAME LOOP ###############################################################
 
