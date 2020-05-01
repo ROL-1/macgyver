@@ -1,27 +1,31 @@
 """Main file for MacGiver maze game."""
 import pygame
-from pygame.locals import QUIT, KEYDOWN, K_ESCAPE
+from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, \
+                          K_UP, K_DOWN, K_LEFT, K_RIGHT
+import config
 from maze import Maze
 from player import Player
 from display import Display
-from config import key_set_repeat_delay, key_set_repeat_interval, \
-                   time_clock_tick, nb_obj, keys_events
 
 
 def main():
     """Launch functions."""
     # Launch pygame
     pygame.init()
+
     # Load & generate the maze from the file
     level = Maze()
-    # Generate player firt position, movements and inventory
+    # Manage player movements and generate inventory
     player = Player(level)
     # Display the maze
     display = Display(level, player)
 
+    # Pygame parameters
+    pygame.key.set_repeat(config.KEY_SET_REPEAT_DELAY,
+                          config.KEY_SET_REPEAT_INTERVAL)
+    pygame.time.Clock().tick(config.TIME_CLOCK_TICK)
+
 # GAME LOOP ###################################################################
-    pygame.key.set_repeat(key_set_repeat_delay, key_set_repeat_interval)
-    pygame.time.Clock().tick(time_clock_tick)
     loop = 1
     while loop:
         for event in pygame.event.get():
@@ -31,9 +35,14 @@ def main():
              and event.key == K_ESCAPE:
                 loop = 0
             # Keyboard reactions
+            keys_events = {
+             'UP': K_UP,
+             'DOWN': K_DOWN,
+             'LEFT': K_LEFT,
+             'RIGHT': K_RIGHT}
             if event.type == KEYDOWN:
-                for move in keys_events:
-                    if event.key == move:
+                for move, value in keys_events.items():
+                    if event.key == value:
                         player.movement(move)
 
         # Check Inventory
@@ -42,7 +51,7 @@ def main():
         # Meeting BadGuy
         if (player.x, player.y) == level.coord_badguy:
             # Check inventory
-            if len(player.inventory_list) != nb_obj:
+            if len(player.inventory_list) != config.NB_OBJ:
                 print('YOU LOOSE.')
                 loop = 0
             else:
@@ -60,7 +69,6 @@ def main():
 
         # Re-paste images
         display.repaste_display(level, player)
-
 # END GAME LOOP ###############################################################
 
 

@@ -1,9 +1,8 @@
 """Generic functions for MacGiver maze game."""
 from os import listdir
-from os.path import isfile, join
+from os.path import basename, isfile, join, splitext
 import json
-import pygame
-from os import path
+from pygame import image
 
 
 def list_files(path):
@@ -31,11 +30,11 @@ def name_inc(name, n, value):
 
 def py_img(path):
     """Convert images for pygame."""
-    py_img = pygame.image.load(path).convert_alpha()
+    py_img = image.load(path).convert_alpha()
     return py_img
 
 
-def file_name(adress):
+def file_name(path):
     """Return the name of a file, without extension."""
-    file_name = path.basename(path.splitext(adress)[0])
+    file_name = basename(splitext(path)[0])
     return file_name
