@@ -12,7 +12,6 @@ To exit the labyrinth the player must collect all the objects before meeting the
 
 ---
 ### Prerequisite:
-- Install the Pygame module.
 Install the required files with "pip install -r requirements.txt"
 
 ### Launch:
