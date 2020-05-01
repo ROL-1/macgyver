@@ -1,8 +1,8 @@
 """Display's file for MacGiver maze game."""
-import pygame
-from config import window_size, img_rep, obj_rep, sprite
-from lib import funct
 from glob import glob
+from pygame import display
+import config
+from lib import funct
 
 
 class Display:
@@ -10,7 +10,7 @@ class Display:
 
     def __init__(self, level, player):
         """Initialize window add badguy status and launch display."""
-        self.window = pygame.display.set_mode(window_size)
+        self.window = display.set_mode(config.WINDOW_SIZE)
         # Boolean for Badguy status
         self.badguy_sleeping = False
         # Generate
@@ -21,7 +21,8 @@ class Display:
     def load_img(self):
         """Load images, return a dictionnary."""
         # Return list of images paths
-        img_list = glob(img_rep)+glob(obj_rep)
+        img_list = glob(config.IMG_REP+'\\*')+glob(config.OBJ_REP+'\\*')
+        print(img_list)
 
         # Create dictionnary of images paths
         self.img_dict = {funct.file_name(img_list[i]): img_list[i]
@@ -33,17 +34,17 @@ class Display:
             for y in range(len(level.maze)):
                 if level.maze[y][x] == 'W':
                     self.window.blit(funct.py_img(self.img_dict['wall']),
-                                     (sprite*x, sprite*y))
+                                     (config.SPRITE*x, config.SPRITE*y))
                 elif level.maze[y][x] == 'O':
                     level.coord_outdoor = (x, y)
                     self.window.blit(funct.py_img(self.img_dict['outdoor']),
-                                     (sprite*x, sprite*y))
+                                     (config.SPRITE*x, config.SPRITE*y))
                 elif level.maze[y][x] == 'G':
                     level.coord_badguy = (x, y)
                     # Check if badguy is sleeping
                     if self.badguy_sleeping is not True:
                         self.window.blit(funct.py_img(self.img_dict['badguy']),
-                                         (sprite*x, sprite*y))
+                                         (config.SPRITE*x, config.SPRITE*y))
 
     def display_objects(self, level, player):
         """Display objects in the maze if not looted."""
@@ -51,10 +52,10 @@ class Display:
         while i < len(level.dict_obj):
             for obj_numb, coord in level.dict_obj.items():
                 # py_img = funct.py_img(objects_files[i])
-                py_img = funct.py_img(glob(obj_rep)[i])
+                py_img = funct.py_img(glob(config.OBJ_REP+'\\*')[i])
                 if obj_numb not in player.inventory_list:
-                    self.window.blit(py_img,
-                                     (sprite*coord[0], sprite*coord[1]))
+                    self.window.blit(py_img, (config.SPRITE*coord[0],
+                                              config.SPRITE*coord[1]))
                 i += 1
 
     def repaste_display(self, level, player):
@@ -63,6 +64,6 @@ class Display:
         self.display_maze(level)
         self.display_objects(level, player)
         self.window.blit(funct.py_img(self.img_dict['macgyver']),
-                         (player.x*sprite, player.y*sprite))
+                         (player.x*config.SPRITE, player.y*config.SPRITE))
         # Refresh
-        pygame.display.flip()
+        display.flip()
