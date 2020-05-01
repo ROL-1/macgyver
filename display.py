@@ -22,7 +22,6 @@ class Display:
         """Load images, return a dictionnary."""
         # Return list of images paths
         img_list = glob(config.IMG_REP+'\\*')+glob(config.OBJ_REP+'\\*')
-        print(img_list)
 
         # Create dictionnary of images paths
         self.img_dict = {funct.file_name(img_list[i]): img_list[i]

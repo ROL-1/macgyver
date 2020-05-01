@@ -21,10 +21,3 @@ OBJ_REP = 'images\\objects'
 
 # Levels repertory
 LEVELS_REP = 'levels'
-
-# LEGEND FOR LEVEL CONFIG ####
-# W : is a Wall
-# E : is Empty
-# M : is MacGyver start position
-# B : is BadGuy start position
-# O : is the Outdoor (need to be next to BadGuy)
