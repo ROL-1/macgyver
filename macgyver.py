@@ -2,7 +2,7 @@
 import pygame
 from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, \
                           K_UP, K_DOWN, K_LEFT, K_RIGHT
-import config
+from config import conf_
 from maze import Maze
 from player import Player
 from display import Display
@@ -10,6 +10,9 @@ from display import Display
 
 def main():
     """Launch functions."""
+    # Load constants
+    globals().update(conf_)
+
     # Launch pygame
     pygame.init()
 
@@ -21,9 +24,9 @@ def main():
     display = Display(level, player)
 
     # Pygame parameters
-    pygame.key.set_repeat(config.KEY_SET_REPEAT_DELAY,
-                          config.KEY_SET_REPEAT_INTERVAL)
-    pygame.time.Clock().tick(config.TIME_CLOCK_TICK)
+    pygame.key.set_repeat(KEY_SET_REPEAT_DELAY,
+                          KEY_SET_REPEAT_INTERVAL)
+    pygame.time.Clock().tick(TIME_CLOCK_TICK)
 
 # GAME LOOP ###################################################################
     loop = 1
@@ -51,7 +54,7 @@ def main():
         # Meeting BadGuy
         if (player.x, player.y) == level.coord_badguy:
             # Check inventory
-            if len(player.inventory_list) != config.NB_OBJ:
+            if len(player.inventory_list) != NB_OBJ:
                 print('YOU LOOSE.')
                 loop = 0
             else:

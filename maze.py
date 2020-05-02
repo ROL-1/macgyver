@@ -1,6 +1,6 @@
 """Maze generate's file for MacGiver maze game."""
 from random import sample, choice
-import config
+from config import conf_
 from lib import funct
 
 
@@ -9,8 +9,10 @@ class Maze:
 
     def __init__(self):
         """Create BadGuy status. Load maze file and create 'maze' list."""
+        # Load constants
+        globals().update(conf_)
         # Select one file randomly
-        selected_level = choice(funct.list_files(config.LEVELS_REP))
+        selected_level = choice(funct.list_files(LEVELS_REP))
         # Read .json and return a list
         self.maze = funct.string_json(selected_level)['level_']
         # Generate
@@ -26,9 +28,9 @@ class Maze:
                 if self.maze[y][x] == 'E':
                     empty_spaces_coord.append((x, y))
         # Objects coordinates list:
-        list_coord_obj = sample(empty_spaces_coord, config.NB_OBJ)
+        list_coord_obj = sample(empty_spaces_coord, NB_OBJ)
         # Create dictionary of objects positions : 'obj'i+1:(x,y)
-        for i in range(config.NB_OBJ):
+        for i in range(NB_OBJ):
             self.dict_obj = funct.name_inc('obj', i+1, list_coord_obj[i])
 
     def perso_start_coord(self):
