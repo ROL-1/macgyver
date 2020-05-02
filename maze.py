@@ -30,8 +30,9 @@ class Maze:
         # Objects coordinates list:
         list_coord_obj = sample(empty_spaces_coord, nb_obj)
         # Create dictionary of objects positions : 'obj'i+1:(x,y)
+        self.dict_obj = {}
         for i in range(nb_obj):
-            self.dict_obj = funct.name_inc('obj', i+1, list_coord_obj[i])
+            self.dict_obj['obj'+str(i+1)] = list_coord_obj[i]
 
     def perso_start_coord(self):
         """Generate coordinates for perso start position."""

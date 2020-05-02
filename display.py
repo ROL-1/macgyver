@@ -4,16 +4,14 @@ from pygame import display
 from config import conf_display
 from lib import funct
 import pygame
-import os
 
 
 class Display_mess:
-    """???"""
+    """Display messages."""
 
     def display_message(self, message):
-        """Create police and message screen to display messages."""        
+        """Create police and message screen to display messages."""
         menu_window = display.set_mode((850, 250))
-        # menu_window.fill(pygame.Color("BLACK"))     
         police = pygame.font.Font(None, 44)
         texte = police.render(message, True, pygame.Color("WHITE"))
         rectTexte = texte.get_rect()
@@ -40,7 +38,7 @@ class Display:
         self.display_objects(level, player)
 
     def load_img(self):
-        """Load images, return paths as globals variables"""
+        """Load images, return paths as globals variables."""
         # Return list of images paths
         img_list = glob(IMG_REP+'\\*')+glob(OBJ_REP+'\\*')
         # Create dictionnary of images paths
@@ -77,15 +75,13 @@ class Display:
                     self.window.blit(py_img,
                                      (SPRITE*coord[0], SPRITE*coord[1]))
                 i += 1
-        
+
     def repaste_display(self, level, player):
-        """Repaste display."""        
+        """Repaste display."""
         self.window.blit(funct.py_img(background), (0, 0))
         self.display_maze(level)
         self.display_objects(level, player)
         self.window.blit(funct.py_img(macgyver),
                          (player.x*SPRITE, player.y*SPRITE))
-        # Refresh        
+        # Refresh
         display.flip()
-
-      
