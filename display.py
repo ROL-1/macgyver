@@ -41,6 +41,7 @@ class Display:
         """Load images, return paths as globals variables."""
         # Return list of images paths
         img_list = glob(IMG_REP+'\\*')+glob(OBJ_REP+'\\*')
+
         # Create dictionnary of images paths
         img_dict = {funct.file_name(img_list[i]): img_list[i]
                     for i in range(len(img_list))}
