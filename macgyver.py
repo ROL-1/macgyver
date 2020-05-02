@@ -84,8 +84,7 @@ def main():
             if (player.x, player.y) == level.coord_badguy:
                 # Check inventory
                 if len(player.inventory_list) != nb_obj:
-                    message.display_message("Game Over - Try again ?\
-                                            (F1: Yes, F2: No)")
+                    message.display_message("Game Over - Try again ? (F1: Yes, F2: No)")
                     for event in pygame.event.get():
                         # Close window
                         if event.type == QUIT \
@@ -108,8 +107,7 @@ def main():
             if (player.x, player.y) == level.coord_outdoor:
                 # Check if badguy is sleeping
                 if display.badguy_sleeping is True:
-                    message.display_message("You WIN ! - Try again ?\
-                                            (F1: Yes, F2: No)")
+                    message.display_message("You WIN ! - Try again ? (F1: Yes, F2: No)")
                     for event in pygame.event.get():
                         # Close window
                         if event.type == QUIT \
@@ -126,8 +124,7 @@ def main():
                                 menu_loop = 0
                                 big_loop = 0
                 else:
-                    message.display_message("Bad guy is still awake.\
-                                             Try again ? (F1: Yes, F2: No)")
+                    message.display_message("Bad guy is still awake. Try again ? (F1: Yes, F2: No)")
                     for event in pygame.event.get():
                         # Close window
                         if event.type == QUIT \
