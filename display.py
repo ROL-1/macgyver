@@ -10,7 +10,6 @@ import os
 class Display_mess:
     """???"""
 
-
     def display_message(self, message):
         """Create police and message screen to display messages."""        
         menu_window = display.set_mode((850, 250))
@@ -73,7 +72,6 @@ class Display:
         i = 0
         while i < len(level.dict_obj):
             for obj_numb, coord in level.dict_obj.items():
-                # py_img = funct.py_img(objects_files[i])
                 py_img = funct.py_img(glob(OBJ_REP+'\\*')[i])
                 if obj_numb not in player.inventory_list:
                     self.window.blit(py_img,
@@ -81,13 +79,13 @@ class Display:
                 i += 1
         
     def repaste_display(self, level, player):
-        """Repaste display."""
+        """Repaste display."""        
         self.window.blit(funct.py_img(background), (0, 0))
         self.display_maze(level)
         self.display_objects(level, player)
         self.window.blit(funct.py_img(macgyver),
                          (player.x*SPRITE, player.y*SPRITE))
-        # Refresh
+        # Refresh        
         display.flip()
 
       

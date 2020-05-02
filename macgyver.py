@@ -40,12 +40,10 @@ def main():
                     game_loop = 0
                     big_loop = 0         
                 elif event.type == KEYDOWN:                
-                    if event.key == K_F1:
-                        print('F1')
+                    if event.key == K_F1:                        
                         nb_obj = 3
                         menu_loop = 0
-                    if event.key == K_F2:
-                        print('F2')
+                    if event.key == K_F2:                        
                         nb_obj = 4
                         menu_loop = 0
         # END MENU LOOP ###########################################    
@@ -97,11 +95,9 @@ def main():
                             menu_loop = 0
                             big_loop = 0        
                         elif event.type == KEYDOWN:                
-                            if event.key == K_F1:
-                                print('F1')                            
+                            if event.key == K_F1:                                                           
                                 game_loop = 0
-                            if event.key == K_F2:
-                                print('F2')
+                            if event.key == K_F2:                                
                                 game_loop = 0
                                 menu_loop = 0
                                 big_loop = 0 
@@ -122,11 +118,9 @@ def main():
                             menu_loop = 0
                             big_loop = 0        
                         elif event.type == KEYDOWN:                
-                            if event.key == K_F1:
-                                print('F1')                            
+                            if event.key == K_F1:                                                           
                                 game_loop = 0
-                            if event.key == K_F2:
-                                print('F2')
+                            if event.key == K_F2:                                
                                 game_loop = 0
                                 menu_loop = 0
                                 big_loop = 0                    
@@ -141,11 +135,9 @@ def main():
                             menu_loop = 0
                             big_loop = 0       
                         elif event.type == KEYDOWN:                
-                            if event.key == K_F1:
-                                print('F1')                            
+                            if event.key == K_F1:                                                           
                                 game_loop = 0                                
-                            if event.key == K_F2:
-                                print('F2')
+                            if event.key == K_F2:                                
                                 game_loop = 0
                                 menu_loop = 0
                                 big_loop = 0  

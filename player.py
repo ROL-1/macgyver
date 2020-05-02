@@ -5,7 +5,7 @@ class Player:
     """Player rules for movements."""
 
     def __init__(self, level):
-        """Player start position."""
+        """Player start parameters."""
         self.level = level
         self.x = self.level.perso_start_coord[0]
         self.y = self.level.perso_start_coord[1]
@@ -33,7 +33,7 @@ class Player:
                 self.x += 1
 
     def loot(self, level):
-        """Rules for loot."""
+        """Increment objects in inventory when player is on."""
         for obj_numb, coord in level.dict_obj.items():
             if (self.x, self.y) == coord \
              and obj_numb not in self.inventory_list:
