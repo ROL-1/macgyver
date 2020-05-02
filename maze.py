@@ -7,7 +7,7 @@ from lib import funct
 class Maze:
     """Generate the maze frame."""
 
-    def __init__(self):
+    def __init__(self, nb_obj):
         """Create BadGuy status. Load maze file and create 'maze' list."""
         # Load constants
         globals().update(conf_)
@@ -16,10 +16,10 @@ class Maze:
         # Read .json and return a list
         self.maze = funct.string_json(selected_level)['level_']
         # Generate
-        self.objects_positions()
+        self.objects_positions(nb_obj)
         self.perso_start_coord()
 
-    def objects_positions(self):
+    def objects_positions(self, nb_obj):
         """Check for empty spaces and create a list of objects coord."""
         # Empty spaces coordinates list:
         empty_spaces_coord = []
@@ -28,9 +28,9 @@ class Maze:
                 if self.maze[y][x] == 'E':
                     empty_spaces_coord.append((x, y))
         # Objects coordinates list:
-        list_coord_obj = sample(empty_spaces_coord, NB_OBJ)
+        list_coord_obj = sample(empty_spaces_coord, nb_obj)
         # Create dictionary of objects positions : 'obj'i+1:(x,y)
-        for i in range(NB_OBJ):
+        for i in range(nb_obj):
             self.dict_obj = funct.name_inc('obj', i+1, list_coord_obj[i])
 
     def perso_start_coord(self):

@@ -38,3 +38,4 @@ def file_name(path):
     """Return the name of a file, without extension."""
     file_name = basename(splitext(path)[0])
     return file_name
+
