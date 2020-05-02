@@ -19,15 +19,6 @@ def string_json(path):
         return data_dict
 
 
-dict_ = {}
-
-
-def name_inc(name, n, value):
-    """Create dictionary with key name increment."""
-    dict_[name+str(n)] = value
-    return dict_
-
-
 def py_img(path):
     """Convert images for pygame."""
     py_img = image.load(path).convert_alpha()
