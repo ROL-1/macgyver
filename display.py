@@ -1,9 +1,8 @@
 """Display's file for MacGiver maze game."""
 from glob import glob
-from pygame import display
+from pygame import display, font, Color
 from config import conf_display
 from lib import funct
-import pygame
 
 
 class Display_mess:
@@ -12,14 +11,14 @@ class Display_mess:
     def display_message(self, message):
         """Create police and message screen to display messages."""
         menu_window = display.set_mode((850, 250))
-        police = pygame.font.Font(None, 44)
-        texte = police.render(message, True, pygame.Color("WHITE"))
+        police = font.Font(None, 44)
+        texte = police.render(message, True, Color("WHITE"))
         rectTexte = texte.get_rect()
         rectwindow = menu_window.get_rect()
         rectTexte.center = rectwindow.center
-        menu_window.fill(pygame.Color("BLACK"))
+        menu_window.fill(Color("BLACK"))
         menu_window.blit(texte, rectTexte)
-        pygame.display.update()
+        display.update()
 
 
 class Display:

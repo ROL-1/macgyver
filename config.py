@@ -1,10 +1,12 @@
 """References and parameters for MacGiver maze game."""
-conf_ = {
+conf_macgyver = {
 # Pygame parameters
 'KEY_SET_REPEAT_DELAY': 400,    # (milliseconds)
 'KEY_SET_REPEAT_INTERVAL': 30,  # (milliseconds)
 'TIME_CLOCK_TICK': 30,          # (milliseconds)
+}
 
+conf_maze = {
 # Levels repertory
 'LEVELS_REP': 'levels'
 }

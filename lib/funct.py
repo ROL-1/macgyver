@@ -1,7 +1,7 @@
 """Generic functions for MacGiver maze game."""
 from os import listdir
 from os.path import basename, isfile, join, splitext
-import json
+from json import load
 from pygame import image
 
 
@@ -15,7 +15,7 @@ def list_files(path):
 def string_json(path):
     """Read a .json and return a dictionary."""
     with open(path) as json_data:
-        data_dict = json.load(json_data)
+        data_dict = load(json_data)
         return data_dict
 
 

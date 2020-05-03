@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import QUIT, KEYDOWN, K_ESCAPE,\
                           K_UP, K_DOWN, K_LEFT, K_RIGHT,\
                           K_F1, K_F2
-from config import conf_
+from config import conf_macgyver
 from maze import Maze
 from player import Player
 from display import Display_mess, Display
@@ -12,7 +12,7 @@ from display import Display_mess, Display
 def main():
     """Launch functions."""
     # Load constants
-    globals().update(conf_)
+    globals().update(conf_macgyver)
     # Launch pygame
     pygame.init()
 
@@ -53,7 +53,6 @@ def main():
             player = Player(level)
             # Display the maze
             display = Display(level, player)
-
         # GAME LOOP ###############################################
         while game_loop:
             for event in pygame.event.get():
@@ -77,14 +76,15 @@ def main():
                             player.movement(move)
             # Re-paste images
             display.repaste_display(level, player)
+
             # Check Inventory
             player.loot(level)
-
             # Meeting BadGuy
             if (player.x, player.y) == level.coord_badguy:
                 # Check inventory
                 if len(player.inventory_list) != nb_obj:
-                    message.display_message("Game Over - Try again ? (F1: Yes, F2: No)")
+                    message.display_message(
+                     "Game Over - Try again ? (F1: Yes, F2: No)")
                     for event in pygame.event.get():
                         # Close window
                         if event.type == QUIT \
@@ -107,7 +107,8 @@ def main():
             if (player.x, player.y) == level.coord_outdoor:
                 # Check if badguy is sleeping
                 if display.badguy_sleeping is True:
-                    message.display_message("You WIN ! - Try again ? (F1: Yes, F2: No)")
+                    message.display_message(
+                     "You WIN ! - Try again ? (F1: Yes, F2: No)")
                     for event in pygame.event.get():
                         # Close window
                         if event.type == QUIT \
@@ -124,7 +125,8 @@ def main():
                                 menu_loop = 0
                                 big_loop = 0
                 else:
-                    message.display_message("Bad guy is still awake. Try again ? (F1: Yes, F2: No)")
+                    message.display_message(
+                     "Bad guy is still awake. Try again ? (F1: Yes, F2: No)")
                     for event in pygame.event.get():
                         # Close window
                         if event.type == QUIT \
