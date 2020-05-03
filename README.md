@@ -12,7 +12,9 @@ To exit the labyrinth the player must collect all the objects before meeting the
 
 ---
 ### Prerequisite:
-Install the required files with "pip install -r requirements.txt"
+You can install the required files with "pip install -r requirements.txt"..
+Required module :..
+- pygame
 
 ### Launch:
 Launch the game with "python3 macgyver.py"
@@ -27,9 +29,16 @@ The organization of the program is made up of several modules, each with very sp
 - display.py: takes care of the loading of the images and the display by the pygame module.
 ---
 ### Version features:
+__Choose number of objects__
+Before playing, a menu invite the player to choose the number of objects.  
+The player must then collect them all before confronting the Guardian.
+
+__Replay__  
+When the game end, the player is invite to choose if he want to play again.
+
 __New labyrinths__  
 It is possible to add new labyrinths, in the 'levels' folder, respecting the structure and putting it in .json format.  
-The program then automatically loads a random labyrinth among the files present in the folder.
+The program then automatically loads a random labyrinth among the files present in the folder.  
 
 Structure of the labyrinth: a square of 15 sprites out of 15 sprites, where:
 - W: is a wall,
@@ -37,8 +46,3 @@ Structure of the labyrinth: a square of 15 sprites out of 15 sprites, where:
 - M: is the starting position of MacGyver,
 - B: is the Guardian,
 - O: is the exit, it must be next to the Guardian (so that an object cannot be in between).
-
-__New objects__  
-It is possible to add new objects, by adding new images, in the 'images / objects' folder (within the limits of the empty boxes available on the labyrinths).  
-By modifying the parameter 'NB_OBJ' of the file 'config.py', by the number of objects which one wishes to make appear.  
-The player must then collect them all before confronting the Guardian.  
