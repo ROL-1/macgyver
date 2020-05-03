@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import QUIT, KEYDOWN, K_ESCAPE,\
                           K_UP, K_DOWN, K_LEFT, K_RIGHT,\
                           K_F1, K_F2
-from config import conf_macgyver
+import config
 from maze import Maze
 from player import Player
 from display import Display_mess, Display
@@ -11,21 +11,20 @@ from display import Display_mess, Display
 
 def main():
     """Launch functions."""
-    # Load constants
-    globals().update(conf_macgyver)
     # Launch pygame
     pygame.init()
 
     # Pygame parameters
-    pygame.key.set_repeat(KEY_SET_REPEAT_DELAY,
-                          KEY_SET_REPEAT_INTERVAL)
-    pygame.time.Clock().tick(TIME_CLOCK_TICK)
+    pygame.key.set_repeat(config.KEY_SET_REPEAT_DELAY,
+                          config.KEY_SET_REPEAT_INTERVAL)
+    pygame.time.Clock().tick(config.TIME_CLOCK_TICK)
 
     big_loop = 1
     while big_loop:
         game_loop = 1
         menu_loop = 1
         nb_obj = 0
+
         # MENU LOOP ###############################################
         while menu_loop:
             message = Display_mess()
@@ -46,6 +45,8 @@ def main():
                         nb_obj = 4
                         menu_loop = 0
         # END MENU LOOP ###########################################
+
+        # Loads
         if nb_obj != 0:
             # Load & generate the maze from the file
             level = Maze(nb_obj)
@@ -53,6 +54,7 @@ def main():
             player = Player(level)
             # Display the maze
             display = Display(level, player)
+
         # GAME LOOP ###############################################
         while game_loop:
             for event in pygame.event.get():
@@ -74,6 +76,7 @@ def main():
                     for move, value in keys_events.items():
                         if event.key == value:
                             player.movement(move)
+
             # Re-paste images
             display.repaste_display(level, player)
 

@@ -1,6 +1,6 @@
 """Maze generate's file for MacGiver maze game."""
 from random import sample, choice
-from config import conf_maze
+import config
 from lib import funct
 
 
@@ -9,10 +9,8 @@ class Maze:
 
     def __init__(self, nb_obj):
         """Create BadGuy status. Load maze file and create 'maze' list."""
-        # Load constants
-        globals().update(conf_maze)
         # Select one file randomly
-        selected_level = choice(funct.list_files(LEVELS_REP))
+        selected_level = choice(funct.list_files(config.LEVELS_REP))
         # Read .json and return a list
         self.maze = funct.string_json(selected_level)['level_']
         # Generate
