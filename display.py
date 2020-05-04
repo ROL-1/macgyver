@@ -10,8 +10,8 @@ class Display_mess:
 
     def display_message(self, message):
         """Create police and message screen to display messages."""
-        menu_window = display.set_mode((850, 250))
-        police = font.Font(None, 44)
+        menu_window = display.set_mode(config.WINDOW_SIZE)
+        police = font.Font(None, 22)
         texte = police.render(message, True, Color("WHITE"))
         rectTexte = texte.get_rect()
         rectwindow = menu_window.get_rect()

@@ -29,7 +29,7 @@ The organization of the program is made up of several modules, each with very sp
 - display.py: takes care of the loading of the images and the display by the pygame module.
 ---
 ### Version features:
-__Choose number of objects__..
+__Choose number of objects__  
 Before playing, a menu invite the player to choose the number of objects.  
 The player must then collect them all before confronting the Guardian.
 

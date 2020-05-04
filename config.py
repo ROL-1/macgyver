@@ -18,3 +18,9 @@ WINDOW_SIZE = (450, 450)
 # type = 'path\\to\\my\\repertory
 IMG_REP = 'images'
 OBJ_REP = 'images\\objects'
+
+# Messages
+MENU_MESS = '3 objects : F1 - 4 objects : F2'
+LOOSE_MESS = 'Game Over - Try again ? (F1: Yes, F2: No)'
+WIN_MESS = 'You WIN ! - Try again ? (F1: Yes, F2: No)'
+CHEAT_MESS = 'Bad guy is still awake. Try again ? (F1: Yes, F2: No)'
