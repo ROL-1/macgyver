@@ -60,8 +60,8 @@ def main():
             for event in pygame.event.get():
                 # Close window
                 if event.type == QUIT \
-                 or event.type == KEYDOWN \
-                 and event.key == K_ESCAPE:
+                   or event.type == KEYDOWN \
+                   and event.key == K_ESCAPE:
                     game_loop = 0
                     menu_loop = 0
                     big_loop = 0
@@ -77,11 +77,11 @@ def main():
                         if event.key == value:
                             player.movement(move)
 
+            # Add loot in Inventory
+            player.loot(level)
             # Re-paste images
             display.repaste_display(level, player)
 
-            # Check Inventory
-            player.loot(level)
             # Meeting BadGuy
             if (player.x, player.y) == level.coord_badguy:
                 # Check inventory
