@@ -8,25 +8,29 @@ from lib import funct
 class Display_mess:
     """Display messages."""
 
+    window_mess = display.set_mode(config.WINDOW_SIZE)
+
     def display_message(self, message):
         """Create police and message screen to display messages."""
-        menu_window = display.set_mode(config.WINDOW_SIZE)
+
         police = font.Font(None, 22)
         texte = police.render(message, True, Color("WHITE"))
         rectTexte = texte.get_rect()
-        rectwindow = menu_window.get_rect()
+        rectwindow = Display_mess.window_mess.get_rect()
         rectTexte.center = rectwindow.center
-        menu_window.fill(Color("BLACK"))
-        menu_window.blit(texte, rectTexte)
+        Display_mess.window_mess.fill(Color("BLACK"))
+        Display_mess.window_mess.blit(texte, rectTexte)
         display.update()
 
 
 class Display:
-    """Display the maze."""
+    """Display the maze and messages."""
+
+    window = display.set_mode(config.WINDOW_SIZE)
 
     def __init__(self, level, player):
         """Initialize window add badguy status and launch display."""
-        self.window = display.set_mode(config.WINDOW_SIZE)
+        Display.window = display.set_mode(config.WINDOW_SIZE)
         # Boolean for Badguy status
         self.badguy_sleeping = False
         # Generate
@@ -48,18 +52,19 @@ class Display:
         for x in range(len(level.maze)):
             for y in range(len(level.maze)):
                 if level.maze[y][x] == 'W':
-                    self.window.blit(funct.py_img(self.img_dict['wall']),
-                                     (config.SPRITE*x, config.SPRITE*y))
+                    Display.window.blit(funct.py_img(self.img_dict['wall']),
+                                        (config.SPRITE*x, config.SPRITE*y))
                 elif level.maze[y][x] == 'O':
                     level.coord_outdoor = (x, y)
-                    self.window.blit(funct.py_img(self.img_dict['outdoor']),
-                                     (config.SPRITE*x, config.SPRITE*y))
+                    Display.window.blit(funct.py_img(self.img_dict['outdoor']),
+                                        (config.SPRITE*x, config.SPRITE*y))
                 elif level.maze[y][x] == 'G':
                     level.coord_badguy = (x, y)
                     # Check if badguy is sleeping
                     if self.badguy_sleeping is not True:
-                        self.window.blit(funct.py_img(self.img_dict['badguy']),
-                                         (config.SPRITE*x, config.SPRITE*y))
+                        Display.window.blit(funct.py_img(
+                                            self.img_dict['badguy']),
+                                            (config.SPRITE*x, config.SPRITE*y))
 
     def display_objects(self, level, player):
         """Display objects in the maze if not looted."""
@@ -68,17 +73,17 @@ class Display:
             for obj_numb, coord in level.dict_obj.items():
                 py_img = funct.py_img(glob(config.OBJ_REP+'\\*')[i])
                 if obj_numb not in player.inventory_list:
-                    self.window.blit(py_img,
-                                     (config.SPRITE*coord[0],
-                                      config.SPRITE*coord[1]))
+                    Display.window.blit(py_img,
+                                        (config.SPRITE*coord[0],
+                                         config.SPRITE*coord[1]))
                 i += 1
 
     def repaste_display(self, level, player):
         """Repaste display."""
-        self.window.blit(funct.py_img(self.img_dict['background']), (0, 0))
+        Display.window.blit(funct.py_img(self.img_dict['background']), (0, 0))
         self.display_maze(level)
         self.display_objects(level, player)
-        self.window.blit(funct.py_img(self.img_dict['macgyver']),
-                         (player.x*config.SPRITE, player.y*config.SPRITE))
+        Display.window.blit(funct.py_img(self.img_dict['macgyver']),
+                            (player.x*config.SPRITE, player.y*config.SPRITE))
         # Refresh
         display.flip()
