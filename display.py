@@ -12,7 +12,6 @@ class Display_mess:
 
     def display_message(self, message):
         """Create police and message screen to display messages."""
-
         police = font.Font(None, 22)
         texte = police.render(message, True, Color("WHITE"))
         rectTexte = texte.get_rect()
