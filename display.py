@@ -11,14 +11,14 @@ class Display_mess:
     window_mess = display.set_mode(config.WINDOW_SIZE)
 
     def display_message(self, message):
-        """Create police and message screen to display messages."""
-        police = font.Font(None, 22)
-        texte = police.render(message, True, Color("WHITE"))
-        rectTexte = texte.get_rect()
-        rectwindow = Display_mess.window_mess.get_rect()
-        rectTexte.center = rectwindow.center
+        """Create font and message screen to display messages."""
+        font_ = font.Font(None, 44)
+        x, y = 20, 20
         Display_mess.window_mess.fill(Color("BLACK"))
-        Display_mess.window_mess.blit(texte, rectTexte)
+        lines = message.splitlines()
+        for i, line in enumerate(lines):
+            text = font_.render(line, True, Color("WHITE"))
+            Display_mess.window_mess.blit(text, (x, y + 44*i))
         display.update()
 
 
@@ -40,7 +40,8 @@ class Display:
     def load_img(self):
         """Load images, return paths as globals variables."""
         # Return list of images paths
-        img_list = glob(config.IMG_REP+'\\*')+glob(config.OBJ_REP+'\\*')
+        img_list = glob(config.IMG_REP+'/*')+glob(config.OBJ_REP+'/*')
+        print(img_list)
 
         # Create dictionnary of images paths
         self.img_dict = {funct.file_name(img_list[i]): img_list[i]
@@ -70,7 +71,7 @@ class Display:
         i = 0
         while i < len(level.dict_obj):
             for obj_numb, coord in level.dict_obj.items():
-                py_img = funct.py_img(glob(config.OBJ_REP+'\\*')[i])
+                py_img = funct.py_img(glob(config.OBJ_REP+'/*')[i])
                 if obj_numb not in player.inventory_list:
                     Display.window.blit(py_img,
                                         (config.SPRITE*coord[0],

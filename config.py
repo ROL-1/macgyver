@@ -17,10 +17,36 @@ WINDOW_SIZE = (450, 450)
 # Images repertory
 # type = 'path\\to\\my\\repertory
 IMG_REP = 'images'
-OBJ_REP = 'images\\objects'
+OBJ_REP = 'images/objects'
 
 # Messages
-MENU_MESS = '3 objects : F1 - 4 objects : F2'
-LOOSE_MESS = 'Game Over - Try again ? (F1: Yes, F2: No)'
-WIN_MESS = 'You WIN ! - Try again ? (F1: Yes, F2: No)'
-CHEAT_MESS = 'Bad guy is still awake. Try again ? (F1: Yes, F2: No)'
+MENU_MESS = """Help MacGyver to escape!
+
+Please, choose if you want :
+- 3 objects : press F1
+- 4 objects : press F2
+
+And good luck."""
+
+LOOSE_MESS = """Game Over
+
+
+Try again ?
+
+- F1: Yes
+- F2: No"""
+
+WIN_MESS = """You WIN !
+
+Try again ?
+
+- F1: Yes
+- F2: No"""
+
+CHEAT_MESS = """Hum... Bad guy is still awake.
+Are you a cheater ?
+
+Try again ?
+
+- F1: Yes
+- F2: No"""

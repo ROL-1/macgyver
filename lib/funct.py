@@ -7,25 +7,21 @@ from pygame import image
 
 def list_files(path):
     """Make list of all path files in a directory."""
-    files_list = [join(path, f) for f in listdir(path)
-                  if isfile(join(path, f))]
-    return files_list
+    return [join(path, f) for f in listdir(path)
+            if isfile(join(path, f))]
 
 
 def string_json(path):
     """Read a .json and return a dictionary."""
     with open(path) as json_data:
-        data_dict = load(json_data)
-        return data_dict
+        return load(json_data)
 
 
 def py_img(path):
     """Convert images for pygame."""
-    py_img = image.load(path).convert_alpha()
-    return py_img
+    return image.load(path).convert_alpha()
 
 
 def file_name(path):
     """Return the name of a file, without extension."""
-    file_name = basename(splitext(path)[0])
-    return file_name
+    return basename(splitext(path)[0])
