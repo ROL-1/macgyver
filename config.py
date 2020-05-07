@@ -15,7 +15,7 @@ SPRITE = 30
 WINDOW_SIZE = (450, 450)
 
 # Images repertory
-# type = 'path\\to\\my\\repertory
+# type = 'path/to/repertory
 IMG_REP = 'images'
 OBJ_REP = 'images/objects'
 

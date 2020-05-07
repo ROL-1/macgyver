@@ -16,20 +16,20 @@ class Player:
     def movement(self, move):
         """Rules for player movements."""
         if move == 'UP':
-            if self.y-1 >= 0 \
-             and self.level.maze[self.y-1][self.x] != 'W':
+            if self.y - 1 >= 0 \
+             and self.level.maze[self.y - 1][self.x] != 'W':
                 self.y -= 1
         elif move == 'DOWN':
-            if self.y+1 < len(self.level.maze) \
-             and self.level.maze[self.y+1][self.x] != 'W':
+            if self.y + 1 < len(self.level.maze) \
+             and self.level.maze[self.y + 1][self.x] != 'W':
                 self.y += 1
         elif move == 'LEFT':
-            if self.x-1 >= 0 \
-             and self.level.maze[self.y][self.x-1] != 'W':
+            if self.x - 1 >= 0 \
+             and self.level.maze[self.y][self.x - 1] != 'W':
                 self.x -= 1
         elif move == 'RIGHT':
-            if self.x+1 < len(self.level.maze) \
-             and self.level.maze[self.y][self.x+1] != 'W':
+            if self.x + 1 < len(self.level.maze) \
+             and self.level.maze[self.y][self.x + 1] != 'W':
                 self.x += 1
 
     def loot(self, level):
