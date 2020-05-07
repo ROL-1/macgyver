@@ -6,7 +6,7 @@ from pygame.locals import QUIT, KEYDOWN, K_ESCAPE,\
 import config
 from maze import Maze
 from player import Player
-from display import Display_mess, Display
+from display import Display_mess, Display_maze
 
 
 def main():
@@ -23,12 +23,14 @@ def main():
     while big_loop:
         game_loop = 1
         menu_loop = 1
+        if Maze.game_count !=0:
+            Maze.print_count()
 
         # MENU LOOP ##########################################
         while menu_loop:
             nb_obj = 0
             message = Display_mess()
-            message.display_message(config.MENU_MESS)
+            message.display_message(config.MENU_MESS)            
             for event in pygame.event.get():
                 # Close window
                 if event.type == QUIT \
@@ -52,7 +54,7 @@ def main():
             # Manage player movements and generate inventory
             player = Player(level)
             # Display the maze
-            display = Display(level, player)
+            display_maze = Display_maze(level, player)
 
             # GAME LOOP ##########################################
             while game_loop:
@@ -77,7 +79,7 @@ def main():
                 # Add loot in Inventory
                 player.loot(level)
                 # Re-paste images
-                display.repaste_display(level, player)
+                display_maze.repaste_display(level, player)
 
                 # Meeting BadGuy
                 if (player.x, player.y) == level.coord_badguy:
@@ -99,7 +101,7 @@ def main():
                                     game_loop = 0
                                     big_loop = 0
                     else:
-                        display.badguy_sleeping = True
+                        display_maze.badguy_sleeping = True
 
                 # Check Exit
                 if (player.x, player.y) == level.coord_outdoor:
@@ -118,7 +120,7 @@ def main():
                             if event.key == K_F2:
                                 game_loop = 0
                                 big_loop = 0
-                    if display.badguy_sleeping is True:
+                    if display_maze.badguy_sleeping is True:
                         message.display_message(config.WIN_MESS)
                     else:
                         message.display_message(config.CHEAT_MESS)
