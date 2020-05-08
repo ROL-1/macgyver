@@ -41,6 +41,8 @@ class Maze:
                     outdoor_coord = ((x, y))
                     self.outdoor_coord = outdoor_coord
 
+
+
     def objects_positions(self, nb_obj):
         """Create a dictionnary of objects coord."""
         # Objects coordinates list:
