@@ -2,18 +2,17 @@
 
 
 class Player:
-    """Player rules for movements."""
+    """Player rules for movements and loot."""
 
     def __init__(self, level):
         """Player start parameters."""
-        self.level = level
         self.x = level.perso_start_coord[0]
         self.y = level.perso_start_coord[1]
         # Generate inventory
         self.inventory_list = []
         self.loot(level)
 
-    def movement(self, move):
+    def movement(self, move, level):
         """Rules for player movements."""
         perso_coord = (self.x, self.y)
         if move == 'UP':
@@ -24,7 +23,7 @@ class Player:
             self.x -= 1
         elif move == 'RIGHT':
             self.x += 1
-        if (self.x, self.y) not in self.level.moves_spaces_list:
+        if (self.x, self.y) not in level.moves_spaces_list:
             (self.x, self.y) = perso_coord
 
     def loot(self, level):

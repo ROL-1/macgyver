@@ -23,6 +23,7 @@ def main():
     while big_loop:
         game_loop = 1
         menu_loop = 1
+        # Print game count after first game
         if Display_maze.game_count != 0:
             Display_maze.print_count()
 
@@ -74,7 +75,7 @@ def main():
                     if event.type == KEYDOWN:
                         for move, value in keys_events.items():
                             if event.key == value:
-                                player.movement(move)
+                                player.movement(move, level)
 
                 # Add loot in Inventory
                 player.loot(level)

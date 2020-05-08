@@ -8,7 +8,7 @@ class Maze:
     """Generate the maze frame."""
 
     def __init__(self, nb_obj):
-        """Create BadGuy status. Load maze file and create 'frame' list."""
+        """Load maze file create frame list and lists for each sprite type."""
         # Select one file randomly
         selected_level = choice(funct.list_files(config.LEVELS_REP))
         # Read .json and return a list

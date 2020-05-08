@@ -40,7 +40,7 @@ class Display_maze:
         self.load_img()
         self.display_sprites(level)
         self.display_objects(level, player)
-        # Game count
+        # Increment game count
         type(self).game_count += 1
 
     def load_img(self):
@@ -61,7 +61,8 @@ class Display_maze:
                         funct.py_img(self.img_dict['outdoor']),
                         (config.SPRITE * level.outdoor_coord[0],
                          config.SPRITE * level.outdoor_coord[1]))
-        type(self).window.blit(
+        if self.badguy_sleeping is False:
+            type(self).window.blit(
                         funct.py_img(self.img_dict['badguy']),
                         (config.SPRITE * level.bad_guy_coord[0],
                          config.SPRITE * level.bad_guy_coord[1]))
@@ -92,6 +93,7 @@ class Display_maze:
 
     @classmethod
     def print_count(cls):
+        """Print game count."""
         if cls.game_count == 1:
             print(f"You played {cls.game_count} game.")
         else:
