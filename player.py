@@ -7,30 +7,25 @@ class Player:
     def __init__(self, level):
         """Player start parameters."""
         self.level = level
-        self.x = self.level.perso_start_coord[0]
-        self.y = self.level.perso_start_coord[1]
+        self.x = level.perso_start_coord[0]
+        self.y = level.perso_start_coord[1]
         # Generate inventory
         self.inventory_list = []
         self.loot(level)
 
     def movement(self, move):
         """Rules for player movements."""
+        perso_coord = (self.x, self.y)
         if move == 'UP':
-            if self.y - 1 >= 0 \
-             and self.level.frame[self.y - 1][self.x] != 'W':
-                self.y -= 1
+            self.y -= 1
         elif move == 'DOWN':
-            if self.y + 1 < len(self.level.frame) \
-             and self.level.frame[self.y + 1][self.x] != 'W':
-                self.y += 1
+            self.y += 1
         elif move == 'LEFT':
-            if self.x - 1 >= 0 \
-             and self.level.frame[self.y][self.x - 1] != 'W':
-                self.x -= 1
+            self.x -= 1
         elif move == 'RIGHT':
-            if self.x + 1 < len(self.level.frame) \
-             and self.level.frame[self.y][self.x + 1] != 'W':
-                self.x += 1
+            self.x += 1
+        if (self.x, self.y) not in self.level.moves_spaces_list:
+            (self.x, self.y) = perso_coord
 
     def loot(self, level):
         """Increment objects in inventory when player is on."""

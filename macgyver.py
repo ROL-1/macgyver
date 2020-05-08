@@ -23,14 +23,14 @@ def main():
     while big_loop:
         game_loop = 1
         menu_loop = 1
-        if Maze.game_count !=0:
+        if Maze.game_count != 0:
             Maze.print_count()
 
         # MENU LOOP ##########################################
         while menu_loop:
             nb_obj = 0
             message = Display_mess()
-            message.display_message(config.MENU_MESS)            
+            message.display_message(config.MENU_MESS)
             for event in pygame.event.get():
                 # Close window
                 if event.type == QUIT \
