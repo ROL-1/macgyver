@@ -82,7 +82,7 @@ def main():
                 display_maze.repaste_display(level, player)
 
                 # Meeting BadGuy
-                if (player.x, player.y) == level.coord_badguy:
+                if (player.x, player.y) == level.bad_guy_coord:
                     # Check inventory
                     if len(player.inventory_list) != nb_obj:
                         message.display_message(config.LOOSE_MESS)
@@ -104,7 +104,7 @@ def main():
                         display_maze.badguy_sleeping = True
 
                 # Check Exit
-                if (player.x, player.y) == level.coord_outdoor:
+                if (player.x, player.y) == level.outdoor_coord:
                     # Check if badguy is sleeping
                     for event in pygame.event.get():
                         # Close window
