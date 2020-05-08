@@ -80,8 +80,8 @@ class Display_maze:
 
     def repaste_display(self, level, player):
         """Repaste display."""
-        type(self).window.blit(funct.py_img(self.img_dict['background']),
-                               (0, 0))
+        type(self).window.blit(
+            funct.py_img(self.img_dict['background']), (0, 0))
         self.display_sprites(level)
         self.display_objects(level, player)
         type(self).window.blit(

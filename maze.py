@@ -17,22 +17,29 @@ class Maze:
         self.frame = funct.string_json(selected_level)['level_']
         # Generate
         self.empty_spaces_list = []
+        self.walls_spaces_list = []
         self.moves_spaces_list = []
-        self.empty_spaces()
+        self.coord_lists()
         self.objects_positions(nb_obj)
-        self.perso_start_coord()
         self.moves_spaces()
         # Game count
         type(self).game_count += 1
 
-    def empty_spaces(self):
-        """Create list of empty spaces."""
+    def coord_lists(self):
+        """Create lists for each sprite type."""
         # Empty spaces coordinates list:
         for x in range(len(self.frame)):
             for y in range(len(self.frame)):
                 if self.frame[y][x] == 'E':
                     self.empty_spaces_list.append((x, y))
-        print(len(self.empty_spaces_list))
+                elif self.frame[y][x] == 'M':
+                    self.perso_start_coord = (x, y)
+                elif self.frame[y][x] == 'G':
+                    bad_guy_coord = ((x, y))
+                    self.bad_guy_coord = bad_guy_coord
+                elif self.frame[y][x] == 'O':
+                    outdoor_coord = ((x, y))
+                    self.outdoor_coord = outdoor_coord
 
     def objects_positions(self, nb_obj):
         """Create a dictionnary of objects coord."""
@@ -43,24 +50,12 @@ class Maze:
         for i in range(nb_obj):
             self.dict_obj['obj' + str(i + 1)] = list_coord_obj[i]
 
-    def perso_start_coord(self):
-        """Generate coordinates for perso start position."""
-        for x in range(len(self.frame)):
-            for y in range(len(self.frame)):
-                if self.frame[y][x] == 'M':
-                    perso_start_coord = (x, y)
-        self.perso_start_coord = perso_start_coord
-
     def moves_spaces(self):
         """Create list of moves spaces."""
         self.moves_spaces_list = self.empty_spaces_list
         self.moves_spaces_list.append(self.perso_start_coord)
-        for x in range(len(self.frame)):
-            for y in range(len(self.frame)):
-                if self.frame[y][x] == 'G':
-                    self.moves_spaces_list.append((x, y))
-                elif self.frame[y][x] == 'O':
-                    self.moves_spaces_list.append((x, y))
+        self.moves_spaces_list.append(self.bad_guy_coord)
+        self.moves_spaces_list.append(self.outdoor_coord)
 
     @classmethod
     def print_count(cls):
