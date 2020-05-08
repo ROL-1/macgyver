@@ -13,9 +13,12 @@ class Display_mess:
     def display_message(self, message):
         """Create font and message screen to display messages."""
         font_ = font.Font(None, 44)
+        # Margins and background
         x, y = 20, 20
         type(self).window_mess.fill(Color("BLACK"))
+        # Read message
         lines = message.splitlines()
+        # Display message
         for i, line in enumerate(lines):
             line_py = font_.render(line, True, Color("WHITE"))
             type(self).window_mess.blit(line_py, (x, y + 44 * i))
@@ -25,6 +28,7 @@ class Display_mess:
 class Display_maze:
     """Display the maze."""
 
+    game_count = 0
     window = display.set_mode(config.WINDOW_SIZE)
 
     def __init__(self, level, player):
@@ -36,6 +40,8 @@ class Display_maze:
         self.load_img()
         self.display_sprites(level)
         self.display_objects(level, player)
+        # Game count
+        type(self).game_count += 1
 
     def load_img(self):
         """Load images, return paths."""
@@ -83,3 +89,10 @@ class Display_maze:
             (player.x * config.SPRITE, player.y * config.SPRITE))
         # Refresh
         display.flip()
+
+    @classmethod
+    def print_count(cls):
+        if cls.game_count == 1:
+            print(f"You played {cls.game_count} game.")
+        else:
+            print(f"You played {cls.game_count} games.")

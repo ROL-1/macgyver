@@ -7,8 +7,6 @@ from lib import funct
 class Maze:
     """Generate the maze frame."""
 
-    game_count = 0
-
     def __init__(self, nb_obj):
         """Create BadGuy status. Load maze file and create 'frame' list."""
         # Select one file randomly
@@ -22,8 +20,6 @@ class Maze:
         self.coord_lists()
         self.objects_positions(nb_obj)
         self.moves_spaces()
-        # Game count
-        type(self).game_count += 1
 
     def coord_lists(self):
         """Create lists for each sprite type."""
@@ -58,10 +54,3 @@ class Maze:
         self.moves_spaces_list.append(self.perso_start_coord)
         self.moves_spaces_list.append(self.bad_guy_coord)
         self.moves_spaces_list.append(self.outdoor_coord)
-
-    @classmethod
-    def print_count(cls):
-        if cls.game_count == 1:
-            print(f"You played {cls.game_count} game.")
-        else:
-            print(f"You played {cls.game_count} games.")

@@ -23,8 +23,8 @@ def main():
     while big_loop:
         game_loop = 1
         menu_loop = 1
-        if Maze.game_count != 0:
-            Maze.print_count()
+        if Display_maze.game_count != 0:
+            Display_maze.print_count()
 
         # MENU LOOP ##########################################
         while menu_loop:
