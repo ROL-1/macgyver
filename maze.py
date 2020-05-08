@@ -16,20 +16,28 @@ class Maze:
         # Read .json and return a list
         self.frame = funct.string_json(selected_level)['level_']
         # Generate
+        self.empty_spaces_list = []
+        self.moves_spaces_list = []
+        self.empty_spaces()
         self.objects_positions(nb_obj)
         self.perso_start_coord()
+        self.moves_spaces()
+        # Game count
         type(self).game_count += 1
 
-    def objects_positions(self, nb_obj):
-        """Check for empty spaces and create a list of objects coord."""
+    def empty_spaces(self):
+        """Create list of empty spaces."""
         # Empty spaces coordinates list:
-        empty_spaces_coord = []
         for x in range(len(self.frame)):
             for y in range(len(self.frame)):
                 if self.frame[y][x] == 'E':
-                    empty_spaces_coord.append((x, y))
+                    self.empty_spaces_list.append((x, y))
+        print(len(self.empty_spaces_list))
+
+    def objects_positions(self, nb_obj):
+        """Create a dictionnary of objects coord."""
         # Objects coordinates list:
-        list_coord_obj = sample(empty_spaces_coord, nb_obj)
+        list_coord_obj = sample(self.empty_spaces_list, nb_obj)
         # Create dictionary of objects positions : 'obj'i+1:(x,y)
         self.dict_obj = {}
         for i in range(nb_obj):
@@ -42,6 +50,17 @@ class Maze:
                 if self.frame[y][x] == 'M':
                     perso_start_coord = (x, y)
         self.perso_start_coord = perso_start_coord
+
+    def moves_spaces(self):
+        """Create list of moves spaces."""
+        self.moves_spaces_list = self.empty_spaces_list
+        self.moves_spaces_list.append(self.perso_start_coord)
+        for x in range(len(self.frame)):
+            for y in range(len(self.frame)):
+                if self.frame[y][x] == 'G':
+                    self.moves_spaces_list.append((x, y))
+                elif self.frame[y][x] == 'O':
+                    self.moves_spaces_list.append((x, y))
 
     @classmethod
     def print_count(cls):
