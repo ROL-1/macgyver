@@ -32,7 +32,6 @@ class Maze:
             for y in range(len(self.frame)):
                 if self.frame[y][x] == 'E':
                     self.empty_spaces_list.append((x, y))
-        print(len(self.empty_spaces_list))
 
     def objects_positions(self, nb_obj):
         """Create a dictionnary of objects coord."""
