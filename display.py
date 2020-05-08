@@ -47,24 +47,18 @@ class Display_maze:
 
     def display_sprites(self, level):
         """Display maze using load_maze."""
-        for x in range(len(level.frame)):
-            for y in range(len(level.frame)):
-                if level.frame[y][x] == 'W':
-                    type(self).window.blit(
+        for coord in level.walls_spaces_list:
+            type(self).window.blit(
                         funct.py_img(self.img_dict['wall']),
-                        (config.SPRITE * x, config.SPRITE * y))
-                elif level.frame[y][x] == 'O':
-                    level.coord_outdoor = (x, y)
-                    type(self).window.blit(
+                        (config.SPRITE * coord[0], config.SPRITE * coord[1]))
+        type(self).window.blit(
                         funct.py_img(self.img_dict['outdoor']),
-                        (config.SPRITE * x, config.SPRITE * y))
-                elif level.frame[y][x] == 'G':
-                    level.coord_badguy = (x, y)
-                    # Check if badguy is sleeping
-                    if self.badguy_sleeping is not True:
-                        type(self).window.blit(
-                            funct.py_img(self.img_dict['badguy']),
-                            (config.SPRITE * x, config.SPRITE * y))
+                        (config.SPRITE * level.outdoor_coord[0],
+                         config.SPRITE * level.outdoor_coord[1]))
+        type(self).window.blit(
+                        funct.py_img(self.img_dict['badguy']),
+                        (config.SPRITE * level.bad_guy_coord[0],
+                         config.SPRITE * level.bad_guy_coord[1]))
 
     def display_objects(self, level, player):
         """Display objects in the maze if not looted."""
