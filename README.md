@@ -12,16 +12,15 @@ To exit the labyrinth the player must collect all the objects before meeting the
 
 ---
 ### Prerequisite:
-* Activate a virtual environment.
-  With pipenv shell or:
+* Activate a virtual environment, with pipenv shell or:  
   - python3 -m venv venv (under macos or linux)
-  - py -m venv venv (under windows)
-  then:
+  - py -m venv venv (under windows)  
+  then:  
   - source venv/bin/activate (macos and linux)
   - venv\Scripts\activate (under windows)
 
 * Install required files with :
-- "pip install -r requirements.txt"
+  - "pip install -r requirements.txt"
 
 ### Launch:
 Launch the game with "macgyver.py"
