@@ -9,7 +9,6 @@ class Player:
         self.perso_coord = level.perso_start_coord
         # Generate inventory
         self.inventory_list = []
-        self.loot(level)
 
     def movement(self, action, level):
         """Rules for player movements."""

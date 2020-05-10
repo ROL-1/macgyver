@@ -38,9 +38,9 @@ def main():
         display_maze = Display_maze(level, player)
 
         # GAME LOOP ##########################################
+        end_message = False
         while game_loop:
             action = py_keyboard()
-            end_message = False
             if action == 'ESCAPE':
                 game_loop = False
             elif action == 'QUIT':
@@ -48,7 +48,8 @@ def main():
                 game_loop = False
                 big_loop = False
             else:
-                player.movement(action, level)
+                if end_message is False:
+                    player.movement(action, level)
 
             # Add loot in Inventory
             player.loot(level)
