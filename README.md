@@ -26,6 +26,11 @@ To exit the labyrinth the player must collect all the objects before meeting the
 ### Launch:
 Launch the game with "macgyver.py"
 
+### Controls:
+- Make choices with              : F1 or F2
+- Move with                      : Arrows
+- Escape to menu or leave pygame : Escape
+
 ### Project structure:
 The organization of the program is made up of several modules, each with very specific functionalities.
 

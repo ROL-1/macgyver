@@ -2,6 +2,7 @@
 from os import listdir
 from os.path import basename, isfile, join, splitext
 from json import load
+
 from pygame import image
 
 

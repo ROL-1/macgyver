@@ -6,30 +6,28 @@ class Player:
 
     def __init__(self, level):
         """Player start parameters."""
-        self.x = level.perso_start_coord[0]
-        self.y = level.perso_start_coord[1]
+        self.perso_coord = level.perso_start_coord
         # Generate inventory
         self.inventory_list = []
         self.loot(level)
 
-    def movement(self, move, level):
+    def movement(self, action, level):
         """Rules for player movements."""
-        perso_coord = (self.x, self.y)
-        if move == 'UP':
-            self.y -= 1
-        elif move == 'DOWN':
-            self.y += 1
-        elif move == 'LEFT':
-            self.x -= 1
-        elif move == 'RIGHT':
-            self.x += 1
-        if (self.x, self.y) not in level.moves_spaces_list:
-            (self.x, self.y) = perso_coord
+        x = self.perso_coord[0]
+        y = self.perso_coord[1]
+        if action == 'UP':
+            y -= 1
+        elif action == 'DOWN':
+            y += 1
+        elif action == 'LEFT':
+            x -= 1
+        elif action == 'RIGHT':
+            x += 1
+        if (x, y) in level.moves_spaces_list:
+            self.perso_coord = (x, y)
 
     def loot(self, level):
         """Increment objects in inventory when player is on."""
-        for obj_numb, coord in level.dict_obj.items():
-            if (self.x, self.y) == coord \
-             and obj_numb not in self.inventory_list:
-                self.inventory_list.append(obj_numb)
-                self.inventory_list.sort()
+        for coord in level.list_coord_obj:
+            if self.perso_coord == coord and coord not in self.inventory_list:
+                self.inventory_list.append(coord)
