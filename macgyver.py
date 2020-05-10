@@ -1,34 +1,9 @@
 """Main file for MacGiver maze game."""
-import pygame
-from pygame.locals import (QUIT, KEYDOWN, K_ESCAPE,
-                           K_UP, K_DOWN, K_LEFT, K_RIGHT,
-                           K_F1, K_F2)
-
 import config
-from maze import Maze
-from player import Player
-from display import Display_mess, Display_maze
-
-
-def keyboard():
-    for event in pygame.event.get():
-        # Leave pygame
-        keys_events = {
-            'UP': K_UP,
-            'DOWN': K_DOWN,
-            'LEFT': K_LEFT,
-            'RIGHT': K_RIGHT,
-            'F1': K_F1,
-            'F2': K_F2,
-            'ESCAPE': K_ESCAPE
-        }
-        if event.type == KEYDOWN:
-            for k, v in keys_events.items():
-                if event.key == v:
-                    print(k)
-                    return k
-        elif event.type == QUIT:
-            return 'QUIT'
+from models.maze import Maze
+from models.player import Player
+from view.display import Display_mess, Display_maze
+from lib.py_lib import py_keyboard
 
 
 def main():
@@ -42,7 +17,7 @@ def main():
             nb_obj = 0
             message = Display_mess()
             message.display_message(config.MENU_MESS)
-            action = keyboard()
+            action = py_keyboard()
             if action == 'QUIT' or action == 'ESCAPE':
                 menu_loop = False
                 game_loop = False
@@ -64,7 +39,7 @@ def main():
 
         # GAME LOOP ##########################################
         while game_loop:
-            action = keyboard()
+            action = py_keyboard()
             end_message = False
             if action == 'ESCAPE':
                 game_loop = False

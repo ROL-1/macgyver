@@ -6,7 +6,8 @@ from types import SimpleNamespace
 from pygame import display, font, Color
 
 import config
-from lib import funct
+from lib.py_lib import py_img
+from lib.paths_lib import file_name
 
 
 class Display_mess:
@@ -57,21 +58,21 @@ class Display_maze:
         for ext in ('/*.png', '/*.jpg'):
             img_paths.extend(glob(config.IMG_REP+ext))
         # Create dictionnary of images paths
-        self.img_paths = {funct.file_name(img_paths[i]): img_paths[i]
+        self.img_paths = {file_name(img_paths[i]): img_paths[i]
                           for i in range(len(img_paths))}
 
     def display_sprites(self, level):
         """Display maze using load_maze."""
         n = SimpleNamespace(**self.img_paths)
         for coord in level.walls_spaces_list:
-            type(self).window.blit(funct.py_img(n.wall),
+            type(self).window.blit(py_img(n.wall),
                                    (config.SPRITE * coord[0],
                                     config.SPRITE * coord[1]))
-        type(self).window.blit(funct.py_img(n.outdoor),
+        type(self).window.blit(py_img(n.outdoor),
                                (config.SPRITE * level.outdoor_coord[0],
                                 config.SPRITE * level.outdoor_coord[1]))
         if self.badguy_sleeping is False:
-            type(self).window.blit(funct.py_img(n.badguy),
+            type(self).window.blit(py_img(n.badguy),
                                    (config.SPRITE * level.bad_guy_coord[0],
                                     config.SPRITE * level.bad_guy_coord[1]))
 
@@ -80,9 +81,9 @@ class Display_maze:
         i = 0
         while i < len(level.list_coord_obj):
             for coord in level.list_coord_obj:
-                py_img = funct.py_img(glob(config.OBJ_REP + '/*')[i])
+                img = py_img(glob(config.OBJ_REP + '/*')[i])
                 if coord not in player.inventory_list:
-                    type(self).window.blit(py_img,
+                    type(self).window.blit(img,
                                            (config.SPRITE * coord[0],
                                             config.SPRITE * coord[1]))
                 i += 1
@@ -90,10 +91,10 @@ class Display_maze:
     def repaste_display(self, level, player):
         """Repaste display."""
         n = SimpleNamespace(**self.img_paths)
-        type(self).window.blit(funct.py_img(n.background), (0, 0))
+        type(self).window.blit(py_img(n.background), (0, 0))
         self.display_sprites(level)
         self.display_objects(level, player)
-        type(self).window.blit(funct.py_img(n.macgyver),
+        type(self).window.blit(py_img(n.macgyver),
                                (player.perso_coord[0] * config.SPRITE,
                                 player.perso_coord[1] * config.SPRITE))
         # Refresh

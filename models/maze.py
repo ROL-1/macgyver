@@ -2,7 +2,7 @@
 from random import sample, choice
 
 import config
-from lib import funct
+from lib.paths_lib import list_files, string_json
 
 
 class Maze:
@@ -11,9 +11,9 @@ class Maze:
     def __init__(self, nb_obj):
         """Load maze file create frame list and lists for each sprite type."""
         # Select one file randomly
-        selected_level = choice(funct.list_files(config.LEVELS_REP))
+        selected_level = choice(list_files(config.LEVELS_REP))
         # Read .json and return a list
-        self.frame = funct.string_json(selected_level)['level_']
+        self.frame = string_json(selected_level)['level_']
         # Generate
         self.empty_spaces_list = []
         self.walls_spaces_list = []
