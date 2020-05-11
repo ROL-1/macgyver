@@ -1,15 +1,14 @@
 """Main file for MacGiver maze game."""
 import config
-from models.maze import Maze
-from models.player import Player
-from view.display import Display_mess, Display_maze
+from game import Game
+from view.display import Display_mess
 from lib.py_lib import py_keyboard
 
 
 def main():
-    """Launch functions."""
-    big_loop = True
-    while big_loop:
+    """Contains loops defining when a menu or game is displayed."""
+    program_loop = True
+    while program_loop:
         game_loop = True
         menu_loop = True
         # MENU LOOP ##########################################
@@ -21,7 +20,7 @@ def main():
             if action == 'QUIT' or action == 'ESCAPE':
                 menu_loop = False
                 game_loop = False
-                big_loop = False
+                program_loop = False
             elif action == 'F1':
                 menu_loop = False
                 nb_obj = 3
@@ -30,15 +29,10 @@ def main():
                 nb_obj = 4
         # END MENU LOOP ######################################
 
-        # Load & generate the maze from the file
-        level = Maze(nb_obj)
-        # Manage player movements and generate inventory
-        player = Player(level)
-        # Display the maze
-        display_maze = Display_maze(level, player)
+        # Initialize game modules
+        game = Game(nb_obj)
 
         # GAME LOOP ##########################################
-        end_message = False
         while game_loop:
             action = py_keyboard()
             if action == 'ESCAPE':
@@ -46,38 +40,17 @@ def main():
             elif action == 'QUIT':
                 menu_loop = False
                 game_loop = False
-                big_loop = False
+                program_loop = False
             else:
-                if end_message is False:
-                    player.movement(action, level)
-
-            # Add loot in Inventory
-            player.loot(level)
-            # Re-paste images
-            display_maze.repaste_display(level, player)
-
-            # Meeting BadGuy
-            if player.perso_coord == level.bad_guy_coord:
-                # Check inventory
-                if len(player.inventory_list) != nb_obj:
-                    message.display_message(config.LOOSE_MESS)
-                    end_message = True
+                game.ends(message, nb_obj)
+                if game.end_message is True:
+                    if action == 'F1':
+                        game_loop = False
+                    elif action == 'F2':
+                        game_loop = False
+                        program_loop = False
                 else:
-                    display_maze.badguy_sleeping = True
-            # Check Exit
-            elif player.perso_coord == level.outdoor_coord:
-                if display_maze.badguy_sleeping:
-                    message.display_message(config.WIN_MESS)
-                    end_message = True
-                else:
-                    message.display_message(config.CHEAT_MESS)
-                    end_message = True
-            if end_message:
-                if action == 'F1':
-                    game_loop = False
-                elif action == 'F2':
-                    game_loop = False
-                    big_loop = False
+                    game.play(action)
         # END GAME LOOP ######################################
 
 
