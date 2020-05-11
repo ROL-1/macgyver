@@ -6,7 +6,8 @@ from lib.py_lib import py_keyboard
 
 
 def main():
-    """Contains loops defining when a menu or game is displayed."""
+    """Contains loops defining when a menu or game is displayed.
+       And Launch the Game module."""
     program_loop = True
     while program_loop:
         game_loop = True

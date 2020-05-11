@@ -1,4 +1,4 @@
-"""Generic functions for MacGiver maze game."""
+"""Gives generics functions to use paths for MacGiver maze game."""
 from os import listdir
 from os.path import basename, isfile, join, splitext
 from json import load

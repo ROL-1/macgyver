@@ -1,3 +1,4 @@
+"""Functions using pygame for MacGiver maze game."""
 import pygame
 from pygame import image
 from pygame.locals import (QUIT, KEYDOWN, K_ESCAPE,

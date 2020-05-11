@@ -42,14 +42,14 @@ class Display_maze:
 
     window = display.set_mode(config.WINDOW_SIZE)
 
-    def __init__(self, level, player):
+    def __init__(self, maze, player):
         """Initialize window add badguy status and launch display."""
         # Boolean for Badguy status
         self.badguy_sleeping = False
         # Generate
         self.load_img()
-        self.display_sprites(level)
-        self.display_objects(level, player)
+        self.display_sprites(maze)
+        self.display_objects(maze, player)
 
     def load_img(self):
         """Load images, return paths."""
@@ -61,26 +61,26 @@ class Display_maze:
         self.img_paths = {file_name(img_paths[i]): img_paths[i]
                           for i in range(len(img_paths))}
 
-    def display_sprites(self, level):
+    def display_sprites(self, maze):
         """Display maze using load_maze."""
         n = SimpleNamespace(**self.img_paths)
-        for coord in level.walls_spaces_list:
+        for coord in maze.walls_spaces_list:
             type(self).window.blit(py_img(n.wall),
                                    (config.SPRITE * coord[0],
                                     config.SPRITE * coord[1]))
         type(self).window.blit(py_img(n.outdoor),
-                               (config.SPRITE * level.outdoor_coord[0],
-                                config.SPRITE * level.outdoor_coord[1]))
+                               (config.SPRITE * maze.outdoor_coord[0],
+                                config.SPRITE * maze.outdoor_coord[1]))
         if self.badguy_sleeping is False:
             type(self).window.blit(py_img(n.badguy),
-                                   (config.SPRITE * level.bad_guy_coord[0],
-                                    config.SPRITE * level.bad_guy_coord[1]))
+                                   (config.SPRITE * maze.bad_guy_coord[0],
+                                    config.SPRITE * maze.bad_guy_coord[1]))
 
-    def display_objects(self, level, player):
+    def display_objects(self, maze, player):
         """Display objects in the maze if not looted."""
         i = 0
-        while i < len(level.list_coord_obj):
-            for coord in level.list_coord_obj:
+        while i < len(maze.list_coord_obj):
+            for coord in maze.list_coord_obj:
                 img = py_img(glob(config.OBJ_REP + '/*')[i])
                 if coord not in player.inventory_list:
                     type(self).window.blit(img,
@@ -88,12 +88,12 @@ class Display_maze:
                                             config.SPRITE * coord[1]))
                 i += 1
 
-    def repaste_display(self, level, player):
+    def repaste_display(self, maze, player):
         """Repaste display."""
         n = SimpleNamespace(**self.img_paths)
         type(self).window.blit(py_img(n.background), (0, 0))
-        self.display_sprites(level)
-        self.display_objects(level, player)
+        self.display_sprites(maze)
+        self.display_objects(maze, player)
         type(self).window.blit(py_img(n.macgyver),
                                (player.perso_coord[0] * config.SPRITE,
                                 player.perso_coord[1] * config.SPRITE))
