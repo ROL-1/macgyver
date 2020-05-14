@@ -2,7 +2,7 @@
 from random import sample, choice
 
 import config
-from lib.paths_lib import list_files, string_json
+from libs.paths_lib import list_files, string_json
 
 
 class Maze:
@@ -18,11 +18,11 @@ class Maze:
         self.empty_spaces_list = []
         self.walls_spaces_list = []
         self.moves_spaces_list = []
-        self.coord_lists()
-        self.objects_positions(nb_obj)
-        self.moves_spaces()
+        self._coord_lists()
+        self._objects_positions(nb_obj)
+        self._moves_spaces()
 
-    def coord_lists(self):
+    def _coord_lists(self):
         """Create lists for each sprite type."""
         # Empty spaces coordinates list:
         for x, line in enumerate(self.frame):
@@ -40,11 +40,11 @@ class Maze:
                     outdoor_coord = (y, x)
                     self.outdoor_coord = outdoor_coord
 
-    def objects_positions(self, nb_obj):
+    def _objects_positions(self, nb_obj):
         """Create a list of objects coord."""
         self.list_coord_obj = sample(self.empty_spaces_list, nb_obj)
 
-    def moves_spaces(self):
+    def _moves_spaces(self):
         """Create list of moves spaces."""
         self.moves_spaces_list = self.empty_spaces_list
         self.moves_spaces_list.append(self.perso_start_coord)

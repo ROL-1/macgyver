@@ -1,7 +1,7 @@
 """Game file for MacGiver maze game."""
 import config
-from models.maze import Maze
-from models.player import Player
+from controler.maze import Maze
+from controler.player import Player
 from view.display import Display_maze
 
 

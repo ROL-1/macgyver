@@ -1,13 +1,12 @@
 """Display's file for MacGiver maze game."""
 import pygame
-from glob import glob
 from types import SimpleNamespace
 
 from pygame import display, font, Color
 
 import config
-from lib.py_lib import py_img
-from lib.paths_lib import file_name
+from libs.py_lib import py_img
+from libs.paths_lib import file_name, glob_path
 
 
 class Display_mess:
@@ -48,20 +47,20 @@ class Display_maze:
         self.badguy_sleeping = False
         # Generate
         self.load_img()
-        self.display_sprites(maze)
-        self.display_objects(maze, player)
+        self._display_sprites(maze)
+        self._display_objects(maze, player)
 
     def load_img(self):
         """Load images, return paths."""
         # Return list of images paths
         img_paths = []
         for ext in ('/*.png', '/*.jpg'):
-            img_paths.extend(glob(config.IMG_REP+ext))
+            img_paths.extend(glob_path(config.IMG_REP+ext))
         # Create dictionnary of images paths
         self.img_paths = {file_name(img_paths[i]): img_paths[i]
                           for i in range(len(img_paths))}
 
-    def display_sprites(self, maze):
+    def _display_sprites(self, maze):
         """Display maze using load_maze."""
         n = SimpleNamespace(**self.img_paths)
         for coord in maze.walls_spaces_list:
@@ -76,12 +75,12 @@ class Display_maze:
                                    (config.SPRITE * maze.bad_guy_coord[0],
                                     config.SPRITE * maze.bad_guy_coord[1]))
 
-    def display_objects(self, maze, player):
+    def _display_objects(self, maze, player):
         """Display objects in the maze if not looted."""
         i = 0
         while i < len(maze.list_coord_obj):
             for coord in maze.list_coord_obj:
-                img = py_img(glob(config.OBJ_REP + '/*')[i])
+                img = py_img(glob_path(config.OBJ_REP + '/*')[i])
                 if coord not in player.inventory_list:
                     type(self).window.blit(img,
                                            (config.SPRITE * coord[0],
@@ -92,8 +91,8 @@ class Display_maze:
         """Repaste display."""
         n = SimpleNamespace(**self.img_paths)
         type(self).window.blit(py_img(n.background), (0, 0))
-        self.display_sprites(maze)
-        self.display_objects(maze, player)
+        self._display_sprites(maze)
+        self._display_objects(maze, player)
         type(self).window.blit(py_img(n.macgyver),
                                (player.perso_coord[0] * config.SPRITE,
                                 player.perso_coord[1] * config.SPRITE))

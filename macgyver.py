@@ -2,7 +2,7 @@
 import config
 from game import Game
 from view.display import Display_mess
-from lib.py_lib import py_keyboard
+from libs.py_lib import py_keyboard
 
 
 def main():
