@@ -43,6 +43,9 @@ def main():
                 game_loop = False
                 program_loop = False
             else:
+                # Move
+                game.play(action)
+                # Check game ends or erase badguy
                 game.ends(message, nb_obj)
                 if game.end_message is True:
                     if action == 'F1':
@@ -50,8 +53,6 @@ def main():
                     elif action == 'F2':
                         game_loop = False
                         program_loop = False
-                else:
-                    game.play(action)
         # END GAME LOOP ######################################
 
 
