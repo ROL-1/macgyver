@@ -11,6 +11,7 @@ from libs.paths_lib import file_name, glob_path
 
 class Display_mess:
     """Display messages."""
+
     # Launch pygame
     pygame.init()
 

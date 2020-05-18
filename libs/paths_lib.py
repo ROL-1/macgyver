@@ -23,5 +23,5 @@ def file_name(path):
 
 
 def glob_path(path):
-    """ Return the path wih glob."""
+    """Return the path wih glob."""
     return glob(path)
