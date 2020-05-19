@@ -33,10 +33,11 @@ Launch the game with "macgyver.py"
 ### Project structure:
 The organization of the program is made up of several modules, each with very specific functionalities.
 
-- macgyver.py: has the main function which calls the other modules and contains the game loop.
-- config.py: contains the program constants, indicates the path of the folders containing the images.
+- macgyver.py: has the main function which contains the game loop.
+- game.py : calls the other modules and has game logical.
+- config.py: contains the program constants, indicates the folders containing the images.
 - maze.py: generates the labyrinth and what is there.
-- player.py: contains the rules for moving and manages the pickup of objects.
+- player.py: contains the rules for moving and the inventory.
 - display.py: takes care of the loading of the images and the display by the pygame module.
 ---
 ### Version features:
